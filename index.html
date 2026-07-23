@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NJ OCSS Safeguard Program - Tableau Server</title>
+<title>NJ OCSS Safeguard Program — Tableau Cloud</title>
 <script src="chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -42,7 +42,6 @@
     font-size: 13px;
   }
 
-  /* ===== Tableau Server Top Nav ===== */
   .server-nav {
     background: var(--chrome-dark);
     color: white;
@@ -52,517 +51,272 @@
     height: 44px;
     font-size: 13px;
   }
-  .server-nav .logo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    margin-right: 24px;
-    color: white;
-  }
+  .server-nav .logo { display: flex; align-items: center; gap: 6px; font-weight: 700; margin-right: 24px; color: white; }
   .server-nav .logo-mark {
-    display: inline-block;
+    display: inline-flex;
     width: 22px; height: 22px;
     background: linear-gradient(135deg, #1f77b4 0%, #ff7f0e 100%);
     border-radius: 3px;
-    display: flex; align-items: center; justify-content: center;
-    color: white;
-    font-weight: 900;
-    font-size: 11px;
+    align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 11px;
   }
   .server-nav .nav-links { display: flex; gap: 4px; }
-  .server-nav .nav-links a {
-    color: #cfcfcf;
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 3px;
-    font-size: 13px;
-  }
-  .server-nav .nav-links a.active {
-    background: #4a4a4a;
-    color: white;
-  }
+  .server-nav .nav-links a { color: #cfcfcf; text-decoration: none; padding: 6px 12px; border-radius: 3px; font-size: 13px; }
+  .server-nav .nav-links a.active { background: #4a4a4a; color: white; }
   .server-nav .nav-links a:hover { color: white; }
-  .server-nav .right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+  .server-nav .right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
   .server-nav .search {
-    background: #4a4a4a;
-    border: 1px solid #5a5a5a;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-    width: 220px;
+    background: #4a4a4a; border: 1px solid #5a5a5a; color: white;
+    padding: 5px 10px; border-radius: 3px; font-size: 12px; width: 220px;
   }
   .server-nav .search::placeholder { color: #999; }
-  .server-nav .icon-btn {
-    color: #cfcfcf;
-    cursor: pointer;
-    font-size: 15px;
-  }
+  .server-nav .icon-btn { color: #cfcfcf; cursor: pointer; font-size: 15px; }
   .server-nav .avatar {
-    width: 26px; height: 26px;
-    background: var(--tab-blue);
-    border-radius: 50%;
+    width: 26px; height: 26px; background: var(--tab-blue); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 11px;
+    color: white; font-weight: 700; font-size: 11px;
   }
 
-  /* ===== Breadcrumb bar ===== */
   .breadcrumb {
-    background: white;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--chrome-border);
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: var(--ink-muted);
+    background: white; padding: 10px 20px; border-bottom: 1px solid var(--chrome-border);
+    display: flex; align-items: center; font-size: 12px; color: var(--ink-muted);
   }
   .breadcrumb a { color: var(--link); text-decoration: none; }
   .breadcrumb a:hover { text-decoration: underline; }
   .breadcrumb .sep { margin: 0 6px; color: #999; }
   .breadcrumb .current { color: var(--ink); font-weight: 600; }
-  .breadcrumb .star {
-    margin-left: 8px;
-    color: #d4a017;
-    font-size: 14px;
-    cursor: pointer;
-  }
+  .breadcrumb .star { margin-left: 8px; color: #d4a017; font-size: 14px; cursor: pointer; }
 
-  /* ===== View header (workbook title + actions) ===== */
-  .view-header {
-    background: white;
-    padding: 12px 20px 8px 20px;
-    border-bottom: 1px solid var(--chrome-border-light);
-  }
-  .view-header .title-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .view-header h1 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .view-header .meta {
-    color: var(--ink-muted);
-    font-size: 12px;
-    margin-top: 3px;
-  }
+  .view-header { background: white; padding: 12px 20px 8px 20px; border-bottom: 1px solid var(--chrome-border-light); }
+  .view-header .title-row { display: flex; align-items: center; gap: 12px; }
+  .view-header h1 { margin: 0; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .view-header .meta { color: var(--ink-muted); font-size: 12px; margin-top: 3px; }
   .view-header .meta a { color: var(--link); text-decoration: none; }
 
-  /* ===== Tableau Toolbar ===== */
   .toolbar {
-    background: white;
-    padding: 6px 12px;
-    border-bottom: 1px solid var(--chrome-border);
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    font-size: 12px;
-    color: var(--ink);
+    background: white; padding: 6px 12px; border-bottom: 1px solid var(--chrome-border);
+    display: flex; align-items: center; gap: 2px; font-size: 12px; color: var(--ink);
   }
   .toolbar .tb-btn {
-    padding: 5px 10px;
-    background: white;
-    border: 1px solid transparent;
-    color: var(--ink);
-    cursor: pointer;
-    border-radius: 3px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
+    padding: 5px 10px; background: white; border: 1px solid transparent; color: var(--ink);
+    cursor: pointer; border-radius: 3px; display: inline-flex; align-items: center; gap: 5px; font-size: 12px;
   }
   .toolbar .tb-btn:hover { background: #f0f0f0; border-color: var(--chrome-border-light); }
   .toolbar .tb-btn.disabled { color: #bbb; cursor: default; }
-  .toolbar .tb-btn.disabled:hover { background: white; border-color: transparent; }
-  .toolbar .divider {
-    width: 1px;
-    height: 20px;
-    background: var(--chrome-border-light);
-    margin: 0 6px;
-  }
-  .toolbar .right {
-    margin-left: auto;
-    display: flex;
-    gap: 2px;
-    align-items: center;
-  }
-  .toolbar .tb-btn.primary {
-    background: var(--link);
-    color: white;
-    border-color: var(--link);
-  }
+  .toolbar .divider { width: 1px; height: 20px; background: var(--chrome-border-light); margin: 0 6px; }
+  .toolbar .right { margin-left: auto; display: flex; gap: 2px; align-items: center; }
+  .toolbar .tb-btn.primary { background: var(--link); color: white; border-color: var(--link); }
   .toolbar .tb-btn.primary:hover { background: #005a91; }
 
-  /* ===== Dashboard Canvas ===== */
-  .canvas-wrap {
-    padding: 12px;
-    background: var(--page-bg);
-  }
+  .canvas-wrap { padding: 12px; background: var(--page-bg); }
   .dashboard {
-    background: white;
-    padding: 16px;
-    max-width: 1400px;
-    margin: 0 auto;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    border: 1px solid var(--chrome-border-light);
+    background: white; padding: 16px; max-width: 1500px; margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid var(--chrome-border-light);
   }
-
   .dashboard-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--ink);
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--ink);
-    margin-bottom: 4px;
+    font-size: 20px; font-weight: 700; color: var(--ink);
+    padding-bottom: 8px; border-bottom: 2px solid var(--ink); margin-bottom: 4px;
   }
   .dashboard-subtitle {
-    font-size: 11px;
-    color: var(--ink-muted);
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 11px; color: var(--ink-muted); margin-bottom: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
 
-  /* ===== Filter bar (right side vertical) ===== */
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 12px;
-  }
+  .content-grid { display: grid; grid-template-columns: 1fr 210px; gap: 12px; }
   .filter-panel {
-    background: #f8f8f8;
-    border: 1px solid var(--chrome-border-light);
-    padding: 10px;
-    font-size: 12px;
+    background: #f8f8f8; border: 1px solid var(--chrome-border-light); padding: 10px; font-size: 12px;
   }
   .filter-panel h4 {
-    margin: 0 0 8px 0;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ink-muted);
-    border-bottom: 1px solid var(--chrome-border-light);
-    padding-bottom: 6px;
+    margin: 0 0 8px 0; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--ink-muted);
+    border-bottom: 1px solid var(--chrome-border-light); padding-bottom: 6px;
   }
   .filter-group { margin-bottom: 14px; }
-  .filter-group .label {
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: var(--ink);
-    font-size: 11px;
-  }
+  .filter-group .label { font-weight: 600; margin-bottom: 4px; color: var(--ink); font-size: 11px; }
   .filter-group select {
-    width: 100%;
-    padding: 3px 5px;
-    border: 1px solid var(--chrome-border);
-    background: white;
-    font-size: 12px;
-    font-family: inherit;
+    width: 100%; padding: 3px 5px; border: 1px solid var(--chrome-border);
+    background: white; font-size: 12px; font-family: inherit;
   }
-  .filter-group .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 3px 0;
-    font-size: 12px;
-  }
-  .filter-group .checkbox input { margin: 0; }
-  .slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 3px;
-    background: #ddd;
-    outline: none;
-  }
+  .filter-group .checkbox { display: flex; align-items: center; gap: 6px; margin: 3px 0; font-size: 12px; }
+  .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; background: #ddd; outline: none; }
   .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px; height: 12px;
-    background: var(--link);
-    border-radius: 50%;
-    cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+    width: 12px; height: 12px; background: var(--link); border-radius: 50%; cursor: pointer;
   }
 
-  /* ===== KPI Sheets ===== */
-  .kpi-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .kpi-sheet {
-    background: white;
-    border: 1px solid var(--chrome-border-light);
-    padding: 10px 12px;
-    text-align: left;
-  }
-  .kpi-sheet .val {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1;
-  }
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px; }
+  .kpi-sheet { background: white; border: 1px solid var(--chrome-border-light); padding: 10px 12px; text-align: left; }
+  .kpi-sheet .val { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1; }
   .kpi-sheet .val.blue { color: var(--tab-blue); }
   .kpi-sheet .val.orange { color: var(--tab-orange); }
   .kpi-sheet .val.red { color: var(--tab-red); }
   .kpi-sheet .val.green { color: var(--tab-green); }
-  .kpi-sheet .lbl {
-    font-size: 11px;
-    color: var(--ink-muted);
-    margin-top: 4px;
-    font-weight: 600;
-  }
-  .kpi-sheet .delta {
-    font-size: 11px;
-    margin-top: 4px;
-    color: var(--ink-muted);
-  }
+  .kpi-sheet .val.purple { color: var(--tab-purple); }
+  .kpi-sheet .lbl { font-size: 11px; color: var(--ink-muted); margin-top: 4px; font-weight: 600; }
+  .kpi-sheet .delta { font-size: 11px; margin-top: 4px; color: var(--ink-muted); }
   .kpi-sheet .delta.up { color: var(--tab-green); }
   .kpi-sheet .delta.down { color: var(--tab-red); }
 
-  /* ===== Sheet cards ===== */
-  .row {
-    display: grid;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+  .row { display: grid; gap: 10px; margin-bottom: 10px; }
   .row.two { grid-template-columns: 1.3fr 1fr; }
   .row.split { grid-template-columns: 1fr 1fr; }
+  .row.three { grid-template-columns: 1fr 1fr 1fr; }
+  .row.four { grid-template-columns: 1fr 1fr 1fr 1fr; }
   .row.full { grid-template-columns: 1fr; }
+  .row.wide-left { grid-template-columns: 2fr 1fr; }
 
-  .sheet {
-    background: white;
-    border: 1px solid var(--chrome-border-light);
-    display: flex;
-    flex-direction: column;
-  }
+  .sheet { background: white; border: 1px solid var(--chrome-border-light); display: flex; flex-direction: column; }
   .sheet .sheet-title {
-    padding: 8px 12px;
-    background: #fafafa;
-    border-bottom: 1px solid var(--chrome-border-light);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--ink);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 8px 12px; background: #fafafa; border-bottom: 1px solid var(--chrome-border-light);
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .sheet .sheet-title .actions {
-    display: flex;
-    gap: 4px;
-    color: #999;
-    font-size: 11px;
-  }
+  .sheet .sheet-title .actions { display: flex; gap: 4px; color: #999; font-size: 11px; }
   .sheet .sheet-title .actions span { cursor: pointer; padding: 0 3px; }
-  .sheet .sheet-body {
-    padding: 12px;
-    flex: 1;
-  }
+  .sheet .sheet-body { padding: 12px; flex: 1; }
   .sheet .chart-wrap { position: relative; height: 220px; }
   .sheet .chart-wrap.tall { height: 260px; }
+  .sheet .chart-wrap.xtall { height: 340px; }
+  .sheet .chart-wrap.short { height: 170px; }
 
-  /* ===== NJ County Map (tile grid) ===== */
-  .county-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
+  /* NJ SVG map */
+  .nj-map-wrap { position: relative; width: 100%; }
+  .nj-map { width: 100%; height: auto; display: block; }
+  .nj-map path { stroke: white; stroke-width: 1.2; cursor: pointer; transition: opacity 0.15s; }
+  .nj-map path:hover { opacity: 0.75; stroke: var(--ink); stroke-width: 2; }
+  .map-tooltip {
+    position: absolute; pointer-events: none;
+    background: rgba(30, 30, 30, 0.94); color: white;
+    padding: 6px 10px; font-size: 11px; border-radius: 3px;
+    display: none; z-index: 10; min-width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
-  .county-tile {
-    padding: 6px 8px;
-    color: white;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .county-tile:hover { outline: 2px solid var(--link); outline-offset: -2px; }
-  .county-tile .cnt { font-weight: 400; opacity: 0.9; font-size: 10px; }
-  .r-high { background: #b21e28; }
-  .r-medhigh { background: #d62728; }
-  .r-med { background: #ff7f0e; }
-  .r-medlow { background: #ffbf47; color: #333; }
-  .r-low { background: #2ca02c; }
-  .r-verylow { background: #4d9e4a; }
+  .map-tooltip .tt-name { font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+  .map-tooltip .tt-row { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; }
+  .map-tooltip .tt-row .k { color: #bbb; }
 
-  .map-legend {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid var(--chrome-border-light);
-    font-size: 11px;
-    color: var(--ink-muted);
-    align-items: center;
+  .map-legend-h {
+    display: flex; align-items: center; gap: 6px; margin-top: 10px;
+    font-size: 10px; color: var(--ink-muted); justify-content: center;
   }
-  .map-legend .swatch {
-    display: inline-block;
-    width: 12px; height: 12px;
-    margin-right: 4px;
-    vertical-align: middle;
+  .map-legend-h .grad {
+    display: inline-block; width: 240px; height: 12px;
+    background: linear-gradient(to right, #2ca02c, #ffbf47, #ff7f0e, #d62728, #7f1d1d);
+    border: 1px solid var(--chrome-border-light);
   }
 
-  /* ===== Data Table ===== */
-  table.data {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
+  /* Heatmap */
+  .heatmap { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .heatmap th {
+    text-align: left; padding: 6px 8px; font-size: 10px; font-weight: 600;
+    color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px;
+    background: white;
   }
+  .heatmap th.col { text-align: center; writing-mode: horizontal-tb; padding: 6px 4px; }
+  .heatmap td.county { padding: 4px 8px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .heatmap td.cell {
+    text-align: center; padding: 6px 0; color: white; font-weight: 700; font-size: 11px;
+    border: 1px solid white; cursor: pointer;
+  }
+  .heatmap td.cell:hover { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .heatmap td.total { padding: 4px 8px; font-weight: 700; color: var(--ink); text-align: right; }
+
+  table.data { width: 100%; border-collapse: collapse; font-size: 12px; }
   table.data th {
-    text-align: left;
-    background: #f5f5f5;
-    padding: 6px 8px;
-    font-weight: 700;
-    font-size: 11px;
-    color: var(--ink);
-    border-bottom: 1px solid var(--chrome-border);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    text-align: left; background: #f5f5f5; padding: 6px 8px; font-weight: 700; font-size: 11px;
+    color: var(--ink); border-bottom: 1px solid var(--chrome-border);
+    text-transform: uppercase; letter-spacing: 0.3px;
   }
-  table.data td {
-    padding: 6px 8px;
-    border-bottom: 1px solid var(--chrome-border-light);
-  }
+  table.data td { padding: 6px 8px; border-bottom: 1px solid var(--chrome-border-light); }
   table.data tr:hover { background: #f8fbfe; }
   table.data .county-cell { font-weight: 600; color: var(--link); cursor: pointer; }
   table.data .county-cell:hover { text-decoration: underline; }
-  .cell-bar {
-    display: inline-block;
-    height: 10px;
-    background: var(--tab-blue);
-    vertical-align: middle;
-    margin-right: 6px;
-  }
+  .cell-bar { display: inline-block; height: 10px; background: var(--tab-blue); vertical-align: middle; margin-right: 6px; }
 
   .status-tag {
-    display: inline-block;
-    padding: 1px 6px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    color: white;
-    border-radius: 2px;
+    display: inline-block; padding: 1px 6px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.3px; color: white; border-radius: 2px;
   }
   .st-critical { background: var(--tab-red); }
   .st-high { background: var(--tab-orange); }
   .st-resolved { background: var(--tab-green); }
   .st-open { background: var(--tab-blue); }
+  .st-progress { background: var(--tab-teal); }
+  .st-pending { background: var(--tab-purple); }
 
-  /* ===== Sheet tabs at bottom ===== */
   .sheet-tabs {
-    background: #ececec;
-    border-top: 1px solid var(--chrome-border);
-    padding: 4px 12px 0 12px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    font-size: 12px;
+    background: #ececec; border-top: 1px solid var(--chrome-border);
+    padding: 4px 12px 0 12px; display: flex; align-items: center; gap: 2px; font-size: 12px;
+    overflow-x: auto;
   }
   .sheet-tab {
-    padding: 5px 14px;
-    background: #dcdcdc;
-    border: 1px solid var(--chrome-border);
-    border-bottom: none;
-    color: var(--ink-muted);
-    cursor: pointer;
-    border-radius: 3px 3px 0 0;
-    font-size: 12px;
+    padding: 6px 14px; background: #dcdcdc; border: 1px solid var(--chrome-border);
+    border-bottom: none; color: var(--ink-muted); cursor: pointer;
+    border-radius: 3px 3px 0 0; font-size: 12px; white-space: nowrap;
   }
   .sheet-tab.active {
-    background: white;
-    color: var(--ink);
-    font-weight: 600;
-    position: relative;
-    top: 1px;
-    padding-bottom: 6px;
+    background: white; color: var(--ink); font-weight: 600;
+    position: relative; top: 1px; padding-bottom: 7px;
   }
   .sheet-tab:hover:not(.active) { background: #e6e6e6; }
-  .sheet-tabs .tab-controls {
-    margin-left: auto;
-    display: flex;
-    gap: 4px;
-    color: #888;
-    padding-bottom: 4px;
-  }
+  .sheet-tabs .tab-controls { margin-left: auto; display: flex; gap: 4px; color: #888; padding-bottom: 4px; }
 
-  /* ===== Status bar ===== */
   .status-bar {
-    background: #ececec;
-    border-top: 1px solid var(--chrome-border);
-    padding: 4px 12px;
-    font-size: 11px;
-    color: var(--ink-muted);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #ececec; border-top: 1px solid var(--chrome-border);
+    padding: 4px 12px; font-size: 11px; color: var(--ink-muted);
+    display: flex; justify-content: space-between; align-items: center;
   }
 
-  /* ===== Funnel chart ===== */
   .funnel { padding: 4px 0; }
   .funnel-row {
-    display: grid;
-    grid-template-columns: 130px 1fr 50px;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 5px;
-    font-size: 12px;
+    display: grid; grid-template-columns: 130px 1fr 50px;
+    align-items: center; gap: 8px; margin-bottom: 5px; font-size: 12px;
   }
   .funnel-bar {
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 6px;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
+    height: 20px; display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 6px; color: white; font-size: 11px; font-weight: 700;
   }
   .funnel-row .lbl { color: var(--ink); }
   .funnel-row .pct { color: var(--ink-muted); font-size: 11px; text-align: right; }
 
-  /* ===== Tooltip look ===== */
   .caption {
-    background: #fff9e6;
-    border-left: 3px solid #ffcc00;
-    padding: 6px 10px;
-    font-size: 11px;
-    color: #665500;
-    margin-top: 8px;
-    font-style: italic;
+    background: #fff9e6; border-left: 3px solid #ffcc00;
+    padding: 6px 10px; font-size: 11px; color: #665500;
+    margin-top: 8px; font-style: italic;
   }
+
+  .aging-buckets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .aging-bucket {
+    padding: 12px; border-left: 3px solid; text-align: center; background: #fafafa;
+  }
+  .aging-bucket .av { font-size: 22px; font-weight: 700; }
+  .aging-bucket .al { font-size: 10px; text-transform: uppercase; color: var(--ink-muted); margin-top: 3px; letter-spacing: 0.4px; }
+
+  .county-scorecard { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 8px 0; }
+  .scorecard-item {
+    padding: 8px 10px; background: #fafafa; border-left: 3px solid var(--tab-blue);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .scorecard-item .k { font-size: 11px; color: var(--ink-muted); font-weight: 600; }
+  .scorecard-item .v { font-size: 14px; color: var(--ink); font-weight: 700; }
+
+  .view-panel { display: none; }
+  .view-panel.active { display: block; }
+
+  .highlight-bar {
+    background: #eef7ff; border: 1px solid #b6d9f2; padding: 8px 12px;
+    font-size: 12px; color: #1e4666; margin-bottom: 12px; border-radius: 2px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .highlight-bar strong { color: #0e3a5f; }
 </style>
 </head>
 <body>
 
-<!-- Tableau Server top nav -->
 <div class="server-nav">
-  <div class="logo">
-    <span class="logo-mark">T</span>
-    <span>Tableau Cloud</span>
-  </div>
+  <div class="logo"><span class="logo-mark">T</span><span>Tableau Cloud</span></div>
   <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#">Explore</a>
-    <a href="#">Favorites</a>
-    <a href="#">Recents</a>
-    <a href="#">Shared with Me</a>
-    <a href="#">Recommendations</a>
-    <a href="#" class="active">Collections</a>
+    <a href="#">Home</a><a href="#">Explore</a><a href="#">Favorites</a>
+    <a href="#">Recents</a><a href="#">Shared with Me</a><a href="#" class="active">Collections</a>
   </div>
   <div class="right">
     <input class="search" type="text" placeholder="Search for views, workbooks, and more" />
@@ -573,29 +327,23 @@
   </div>
 </div>
 
-<!-- Breadcrumb -->
 <div class="breadcrumb">
-  <a href="#">NJ OCSS</a>
-  <span class="sep">›</span>
-  <a href="#">Workbooks</a>
-  <span class="sep">›</span>
-  <a href="#">Safeguard Program FY26</a>
-  <span class="sep">›</span>
-  <span class="current">Executive Overview</span>
+  <a href="#">NJ OCSS</a><span class="sep">›</span>
+  <a href="#">Workbooks</a><span class="sep">›</span>
+  <a href="#">Safeguard Program FY26</a><span class="sep">›</span>
+  <span class="current" id="current-view">Executive Overview</span>
   <span class="star">★</span>
 </div>
 
-<!-- Workbook header -->
 <div class="view-header">
-  <div class="title-row">
-    <h1>Safeguard Program - Executive Overview</h1>
-  </div>
+  <div class="title-row"><h1 id="view-title">Safeguard Program — Executive Overview</h1></div>
   <div class="meta">
-    <a href="#">Safeguard Program FY26</a> · Last refreshed 12 minutes ago · Owner: <a href="#">Mahathi Devulapalli</a> · <a href="#">Data Source: NJOCSS_Salesforce_Live</a>
+    <a href="#">Safeguard Program FY26</a> · Last refreshed 12 min ago ·
+    Owner: <a href="#">Mahathi Devulapalli</a> ·
+    <a href="#">Data Source: NJOCSS_Salesforce_Live</a>
   </div>
 </div>
 
-<!-- Tableau Toolbar -->
 <div class="toolbar">
   <button class="tb-btn"><span>↶</span> Undo</button>
   <button class="tb-btn disabled"><span>↷</span> Redo</button>
@@ -616,441 +364,782 @@
   </div>
 </div>
 
-<!-- Canvas -->
 <div class="canvas-wrap">
   <div class="dashboard">
 
-    <div class="dashboard-title">Safeguard Program Health · IRS Pub 1075 Compliance</div>
-    <div class="dashboard-subtitle">Reporting period: FY 2024 - FY 2026 YTD · All 21 New Jersey Counties</div>
+    <!-- =========== TAB 1: EXECUTIVE OVERVIEW =========== -->
+    <div class="view-panel active" data-view="overview">
+      <div class="dashboard-title">Safeguard Program Health · IRS Pub 1075 Compliance</div>
+      <div class="dashboard-subtitle">Reporting period: FY 2024 – FY 2026 YTD · All 21 New Jersey Counties</div>
 
-    <div class="content-grid">
+      <div class="content-grid">
+        <div>
+          <div class="kpi-row">
+            <div class="kpi-sheet"><div class="val green">87%</div><div class="lbl">Compliance Rate</div><div class="delta up">▲ 6.2 pts vs FY25</div></div>
+            <div class="kpi-sheet"><div class="val blue">124</div><div class="lbl">Inspections (3-yr)</div><div class="delta">42 in FY26 YTD</div></div>
+            <div class="kpi-sheet"><div class="val orange">63</div><div class="lbl">Open CAPs</div><div class="delta">17 counties</div></div>
+            <div class="kpi-sheet"><div class="val red">14</div><div class="lbl">Overdue CAPs</div><div class="delta down">▲ 3 vs last month</div></div>
+            <div class="kpi-sheet"><div class="val blue">47d</div><div class="lbl">Avg Cycle Time</div><div class="delta up">▼ 18d vs FY25</div></div>
+          </div>
 
-      <!-- Main content -->
-      <div>
-
-        <!-- KPIs -->
-        <div class="kpi-row">
-          <div class="kpi-sheet">
-            <div class="val green">87%</div>
-            <div class="lbl">Compliance Rate</div>
-            <div class="delta up">▲ 6.2 pts vs FY25</div>
-          </div>
-          <div class="kpi-sheet">
-            <div class="val blue">124</div>
-            <div class="lbl">Inspections (3-yr)</div>
-            <div class="delta">42 in FY26 YTD</div>
-          </div>
-          <div class="kpi-sheet">
-            <div class="val orange">63</div>
-            <div class="lbl">Open CAPs</div>
-            <div class="delta">17 counties</div>
-          </div>
-          <div class="kpi-sheet">
-            <div class="val red">14</div>
-            <div class="lbl">Overdue CAPs</div>
-            <div class="delta down">▲ 3 vs last month</div>
-          </div>
-          <div class="kpi-sheet">
-            <div class="val blue">47d</div>
-            <div class="lbl">Avg Cycle Time</div>
-            <div class="delta up">▼ 18d vs FY25</div>
-          </div>
-        </div>
-
-        <!-- Row 1: County map + Trend -->
-        <div class="row two">
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Open CAPs by County (Risk Rating)</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
-            <div class="sheet-body">
-              <div class="county-grid">
-                <div class="county-tile r-high">Camden<span class="cnt">8</span></div>
-                <div class="county-tile r-high">Cumberland<span class="cnt">6</span></div>
-                <div class="county-tile r-high">Passaic<span class="cnt">7</span></div>
-                <div class="county-tile r-medhigh">Salem<span class="cnt">5</span></div>
-                <div class="county-tile r-med">Essex<span class="cnt">4</span></div>
-                <div class="county-tile r-med">Hudson<span class="cnt">4</span></div>
-                <div class="county-tile r-med">Mercer<span class="cnt">3</span></div>
-                <div class="county-tile r-med">Atlantic<span class="cnt">3</span></div>
-                <div class="county-tile r-med">Ocean<span class="cnt">3</span></div>
-                <div class="county-tile r-medlow">Union<span class="cnt">2</span></div>
-                <div class="county-tile r-medlow">Warren<span class="cnt">2</span></div>
-                <div class="county-tile r-medlow">Gloucester<span class="cnt">2</span></div>
-                <div class="county-tile r-low">Bergen<span class="cnt">1</span></div>
-                <div class="county-tile r-low">Middlesex<span class="cnt">1</span></div>
-                <div class="county-tile r-low">Morris<span class="cnt">1</span></div>
-                <div class="county-tile r-low">Monmouth<span class="cnt">1</span></div>
-                <div class="county-tile r-verylow">Somerset<span class="cnt">0</span></div>
-                <div class="county-tile r-verylow">Burlington<span class="cnt">0</span></div>
-                <div class="county-tile r-verylow">Hunterdon<span class="cnt">0</span></div>
-                <div class="county-tile r-verylow">Sussex<span class="cnt">0</span></div>
-                <div class="county-tile r-verylow">Cape May<span class="cnt">0</span></div>
+          <div class="row two">
+            <div class="sheet">
+              <div class="sheet-title"><span>Open CAPs by County — Choropleth</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body">
+                <div class="nj-map-wrap">
+                  <svg class="nj-map" viewBox="0 0 400 500" id="nj-map"></svg>
+                  <div class="map-tooltip" id="map-tooltip"></div>
+                </div>
+                <div class="map-legend-h">
+                  <span>0</span><span class="grad"></span><span>8+ Open CAPs</span>
+                </div>
               </div>
-              <div class="map-legend">
-                <span style="font-weight: 600; color: var(--ink);">Open CAPs</span>
-                <span><span class="swatch" style="background: #2ca02c;"></span>0</span>
-                <span><span class="swatch" style="background: #ffbf47;"></span>2</span>
-                <span><span class="swatch" style="background: #ff7f0e;"></span>4</span>
-                <span><span class="swatch" style="background: #d62728;"></span>6</span>
-                <span><span class="swatch" style="background: #b21e28;"></span>8+</span>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>Compliance Rate Trend</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap xtall"><canvas id="trendChart"></canvas></div></div>
+            </div>
+          </div>
+
+          <div class="row two">
+            <div class="sheet">
+              <div class="sheet-title"><span>Findings by IRS Pub 1075 Section</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap tall"><canvas id="findingsChart"></canvas></div></div>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>CAP Lifecycle Funnel · FY26</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body">
+                <div class="funnel">
+                  <div class="funnel-row"><span class="lbl">Open</span><div class="funnel-bar" style="width: 100%; background: #1f77b4;">63</div><span class="pct">100%</span></div>
+                  <div class="funnel-row"><span class="lbl">In Progress</span><div class="funnel-bar" style="width: 78%; background: #17becf;">49</div><span class="pct">78%</span></div>
+                  <div class="funnel-row"><span class="lbl">Pending Verify</span><div class="funnel-bar" style="width: 54%; background: #ff7f0e;">34</div><span class="pct">54%</span></div>
+                  <div class="funnel-row"><span class="lbl">Verified</span><div class="funnel-bar" style="width: 41%; background: #2ca02c;">26</div><span class="pct">41%</span></div>
+                  <div class="funnel-row"><span class="lbl">Closed</span><div class="funnel-bar" style="width: 32%; background: #196f19;">20</div><span class="pct">32%</span></div>
+                </div>
+                <div class="caption">Biggest drop-off: Pending Verify → Verified (24%). Evidence review bottleneck.</div>
               </div>
             </div>
           </div>
 
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Compliance Rate Trend</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
+          <div class="row split">
+            <div class="sheet">
+              <div class="sheet-title"><span>Inspector Workload Distribution</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="workloadChart"></canvas></div></div>
             </div>
-            <div class="sheet-body">
-              <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 2: Findings by section + CAP Funnel -->
-        <div class="row two">
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Findings by IRS Pub 1075 Section</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
-            <div class="sheet-body">
-              <div class="chart-wrap tall"><canvas id="findingsChart"></canvas></div>
-            </div>
-          </div>
-
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>CAP Lifecycle Funnel · FY26</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
-            <div class="sheet-body">
-              <div class="funnel">
-                <div class="funnel-row"><span class="lbl">Open</span><div class="funnel-bar" style="width: 100%; background: #1f77b4;">63</div><span class="pct">100%</span></div>
-                <div class="funnel-row"><span class="lbl">In Progress</span><div class="funnel-bar" style="width: 78%; background: #17becf;">49</div><span class="pct">78%</span></div>
-                <div class="funnel-row"><span class="lbl">Pending Verify</span><div class="funnel-bar" style="width: 54%; background: #ff7f0e;">34</div><span class="pct">54%</span></div>
-                <div class="funnel-row"><span class="lbl">Verified</span><div class="funnel-bar" style="width: 41%; background: #2ca02c;">26</div><span class="pct">41%</span></div>
-                <div class="funnel-row"><span class="lbl">Closed</span><div class="funnel-bar" style="width: 32%; background: #196f19;">20</div><span class="pct">32%</span></div>
-              </div>
-              <div class="caption">Biggest drop-off: Pending Verify → Verified (24%). Evidence review is the bottleneck.</div>
+            <div class="sheet">
+              <div class="sheet-title"><span>Inspection Volume · Monthly Seasonality</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="seasonChart"></canvas></div></div>
             </div>
           </div>
         </div>
 
-        <!-- Row 3: Workload + Seasonality -->
-        <div class="row split">
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Inspector Workload Distribution</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
-            <div class="sheet-body">
-              <div class="chart-wrap"><canvas id="workloadChart"></canvas></div>
-            </div>
+        <div class="filter-panel">
+          <h4>Filters</h4>
+          <div class="filter-group"><div class="label">Fiscal Year</div>
+            <select><option>(All)</option><option>FY 2026</option><option>FY 2025</option><option>FY 2024</option></select>
           </div>
+          <div class="filter-group"><div class="label">Compliance Rating</div>
+            <label class="checkbox"><input type="checkbox" checked> (All)</label>
+            <label class="checkbox"><input type="checkbox" checked> High Risk</label>
+            <label class="checkbox"><input type="checkbox" checked> Medium</label>
+            <label class="checkbox"><input type="checkbox" checked> Low</label>
+          </div>
+          <div class="filter-group"><div class="label">Region</div>
+            <select><option>(All)</option><option>North Jersey</option><option>Central Jersey</option><option>South Jersey</option></select>
+          </div>
+          <div class="filter-group"><div class="label">Inspector</div>
+            <select><option>(All)</option><option>J. Reyes</option><option>M. Chen</option><option>P. Okafor</option><option>L. Duarte</option><option>S. Whitman</option><option>A. Sharma</option></select>
+          </div>
+          <div class="filter-group"><div class="label">Pub 1075 Section</div>
+            <label class="checkbox"><input type="checkbox" checked> §3 Records</label>
+            <label class="checkbox"><input type="checkbox" checked> §4 Physical</label>
+            <label class="checkbox"><input type="checkbox" checked> §5 Training</label>
+            <label class="checkbox"><input type="checkbox" checked> §6 Encryption</label>
+            <label class="checkbox"><input type="checkbox" checked> §8 Media</label>
+            <label class="checkbox"><input type="checkbox" checked> §9 Audit Logs</label>
+          </div>
+          <div class="filter-group"><div class="label">Days Open (CAP)</div>
+            <input type="range" min="0" max="180" value="0" class="slider">
+            <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-muted); margin-top: 2px;"><span>0</span><span>180+</span></div>
+          </div>
+          <div style="font-size: 10px; color: var(--ink-muted); margin-top: 16px; border-top: 1px solid var(--chrome-border-light); padding-top: 8px;">
+            <strong>Data Source</strong><br>NJOCSS_Salesforce_Live<br>
+            <span style="color: #2ca02c;">● Connected</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Inspection Volume · Monthly Seasonality</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
-            <div class="sheet-body">
-              <div class="chart-wrap"><canvas id="seasonChart"></canvas></div>
+    <!-- =========== TAB 2: FINDINGS HEATMAP =========== -->
+    <div class="view-panel" data-view="heatmap">
+      <div class="dashboard-title">Findings Heatmap · County × Pub 1075 Section</div>
+      <div class="dashboard-subtitle">Count of findings across 3-year window · Darker = more findings</div>
+
+      <div class="highlight-bar">
+        <strong>📊 Story:</strong> §5.5 Awareness Training is the dominant column — 8 of 21 counties have 4+ findings there. Camden and Cumberland cluster in the top-right as multi-section chronic offenders.
+      </div>
+
+      <div class="row wide-left">
+        <div class="sheet">
+          <div class="sheet-title"><span>Findings Density Heatmap</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <table class="heatmap" id="heatmap"></table>
+            <div class="map-legend-h">
+              <span>0</span><span class="grad" style="background: linear-gradient(to right, #eef2f7, #a6cbe3, #6baed6, #2171b5, #08306b);"></span><span>8+ findings</span>
             </div>
           </div>
         </div>
 
-        <!-- Row 4: Repeat offenders -->
-        <div class="row full">
-          <div class="sheet">
-            <div class="sheet-title">
-              <span>Repeat Offenders · Chronic Findings Across Cycles</span>
-              <div class="actions"><span>▾</span><span>⋮</span></div>
-            </div>
+        <div>
+          <div class="sheet" style="margin-bottom: 10px;">
+            <div class="sheet-title"><span>Top 5 Chronic Cells</span><div class="actions"><span>⋮</span></div></div>
             <div class="sheet-body">
-              <table class="data">
-                <thead>
-                  <tr>
-                    <th>County</th>
-                    <th>Pub 1075 Section</th>
-                    <th>Cycles</th>
-                    <th>First Cited</th>
-                    <th>Latest Status</th>
-                    <th>Days Open</th>
-                    <th>Inspector</th>
-                    <th>Risk</th>
-                  </tr>
-                </thead>
+              <table class="data" style="font-size: 11px;">
+                <thead><tr><th>County</th><th>Section</th><th>Ct</th></tr></thead>
                 <tbody>
-                  <tr>
-                    <td class="county-cell">Camden</td>
-                    <td>§5.5 Awareness Training</td>
-                    <td><span class="cell-bar" style="width: 60px;"></span>3</td>
-                    <td>FY 2024</td>
-                    <td>In Progress</td>
-                    <td>127</td>
-                    <td>J. Reyes</td>
-                    <td><span class="status-tag st-critical">Critical</span></td>
-                  </tr>
-                  <tr>
-                    <td class="county-cell">Cumberland</td>
-                    <td>§9.3.1.5 Audit Logging</td>
-                    <td><span class="cell-bar" style="width: 60px;"></span>3</td>
-                    <td>FY 2024</td>
-                    <td>Pending Verify</td>
-                    <td>94</td>
-                    <td>J. Reyes</td>
-                    <td><span class="status-tag st-critical">Critical</span></td>
-                  </tr>
-                  <tr>
-                    <td class="county-cell">Passaic</td>
-                    <td>§4.3 Physical Security</td>
-                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
-                    <td>FY 2025</td>
-                    <td>Open</td>
-                    <td>62</td>
-                    <td>M. Chen</td>
-                    <td><span class="status-tag st-high">High</span></td>
-                  </tr>
-                  <tr>
-                    <td class="county-cell">Salem</td>
-                    <td>§5.5 Awareness Training</td>
-                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
-                    <td>FY 2025</td>
-                    <td>In Progress</td>
-                    <td>51</td>
-                    <td>P. Okafor</td>
-                    <td><span class="status-tag st-high">High</span></td>
-                  </tr>
-                  <tr>
-                    <td class="county-cell">Essex</td>
-                    <td>§8.3 Media Sanitization</td>
-                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
-                    <td>FY 2025</td>
-                    <td>Verified</td>
-                    <td>0</td>
-                    <td>L. Duarte</td>
-                    <td><span class="status-tag st-resolved">Resolved</span></td>
-                  </tr>
-                  <tr>
-                    <td class="county-cell">Hudson</td>
-                    <td>§9.3.1.5 Audit Logging</td>
-                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
-                    <td>FY 2025</td>
-                    <td>Open</td>
-                    <td>38</td>
-                    <td>S. Whitman</td>
-                    <td><span class="status-tag st-open">Open</span></td>
-                  </tr>
+                  <tr><td class="county-cell">Camden</td><td>§5.5 Training</td><td><strong>9</strong></td></tr>
+                  <tr><td class="county-cell">Cumberland</td><td>§9.3 Audit Logs</td><td><strong>8</strong></td></tr>
+                  <tr><td class="county-cell">Passaic</td><td>§5.5 Training</td><td><strong>7</strong></td></tr>
+                  <tr><td class="county-cell">Salem</td><td>§4.3 Physical</td><td><strong>6</strong></td></tr>
+                  <tr><td class="county-cell">Camden</td><td>§4.3 Physical</td><td><strong>6</strong></td></tr>
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-
-      </div>
-
-      <!-- Filter panel -->
-      <div class="filter-panel">
-        <h4>Filters</h4>
-
-        <div class="filter-group">
-          <div class="label">Fiscal Year</div>
-          <select>
-            <option>(All)</option>
-            <option>FY 2026</option>
-            <option>FY 2025</option>
-            <option>FY 2024</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <div class="label">Compliance Rating</div>
-          <label class="checkbox"><input type="checkbox" checked> (All)</label>
-          <label class="checkbox"><input type="checkbox" checked> High Risk</label>
-          <label class="checkbox"><input type="checkbox" checked> Medium</label>
-          <label class="checkbox"><input type="checkbox" checked> Low</label>
-        </div>
-
-        <div class="filter-group">
-          <div class="label">Region</div>
-          <select>
-            <option>(All)</option>
-            <option>North Jersey</option>
-            <option>Central Jersey</option>
-            <option>South Jersey</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <div class="label">Inspector</div>
-          <select>
-            <option>(All)</option>
-            <option>J. Reyes</option>
-            <option>M. Chen</option>
-            <option>P. Okafor</option>
-            <option>L. Duarte</option>
-            <option>S. Whitman</option>
-            <option>A. Sharma</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <div class="label">Pub 1075 Section</div>
-          <label class="checkbox"><input type="checkbox" checked> §3 Records</label>
-          <label class="checkbox"><input type="checkbox" checked> §4 Physical</label>
-          <label class="checkbox"><input type="checkbox" checked> §5 Training</label>
-          <label class="checkbox"><input type="checkbox" checked> §6 Encryption</label>
-          <label class="checkbox"><input type="checkbox" checked> §8 Media</label>
-          <label class="checkbox"><input type="checkbox" checked> §9 Audit Logs</label>
-        </div>
-
-        <div class="filter-group">
-          <div class="label">Days Open (CAP)</div>
-          <input type="range" min="0" max="180" value="0" class="slider">
-          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-muted); margin-top: 2px;">
-            <span>0</span><span>180+</span>
+          <div class="sheet">
+            <div class="sheet-title"><span>Section Totals</span><div class="actions"><span>⋮</span></div></div>
+            <div class="sheet-body"><div class="chart-wrap short"><canvas id="sectionDonut"></canvas></div></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div style="font-size: 10px; color: var(--ink-muted); margin-top: 16px; border-top: 1px solid var(--chrome-border-light); padding-top: 8px;">
-          <strong>Data Source</strong><br>
-          NJOCSS_Salesforce_Live<br>
-          <span style="color: #2ca02c;">● Connected</span>
+    <!-- =========== TAB 3: CAP AGING =========== -->
+    <div class="view-panel" data-view="aging">
+      <div class="dashboard-title">CAP Aging & Overdue Analysis</div>
+      <div class="dashboard-subtitle">Days-open buckets · overdue drivers · SLA breach forecast</div>
+
+      <div class="highlight-bar">
+        <strong>⚠ Alert:</strong> 14 CAPs are overdue (>90 days without verification). 8 of them are concentrated in 3 counties — Camden, Cumberland, and Passaic.
+      </div>
+
+      <div class="aging-buckets" style="margin-bottom: 12px;">
+        <div class="aging-bucket" style="border-color: var(--tab-green);"><div class="av" style="color: var(--tab-green);">28</div><div class="al">0–30 Days</div></div>
+        <div class="aging-bucket" style="border-color: var(--tab-blue);"><div class="av" style="color: var(--tab-blue);">21</div><div class="al">31–60 Days</div></div>
+        <div class="aging-bucket" style="border-color: var(--tab-orange);"><div class="av" style="color: var(--tab-orange);">14</div><div class="al">61–90 Days</div></div>
+        <div class="aging-bucket" style="border-color: var(--tab-red);"><div class="av" style="color: var(--tab-red);">14</div><div class="al">90+ Days (Overdue)</div></div>
+      </div>
+
+      <div class="row two">
+        <div class="sheet">
+          <div class="sheet-title"><span>CAP Aging Distribution</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="agingChart"></canvas></div></div>
+        </div>
+        <div class="sheet">
+          <div class="sheet-title"><span>Overdue by County</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="overdueByCountyChart"></canvas></div></div>
         </div>
       </div>
 
+      <div class="row full">
+        <div class="sheet">
+          <div class="sheet-title"><span>Overdue CAP Register</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <table class="data">
+              <thead><tr><th>CAP ID</th><th>County</th><th>Finding</th><th>Section</th><th>Days Open</th><th>Overdue By</th><th>Owner</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>CAP-1042</td><td class="county-cell">Camden</td><td>Untracked FTI training completion</td><td>§5.5</td><td>127</td><td><strong style="color: var(--tab-red);">37 d</strong></td><td>J. Reyes</td><td><span class="status-tag st-progress">In Progress</span></td></tr>
+                <tr><td>CAP-1038</td><td class="county-cell">Cumberland</td><td>Audit logs missing for 3 users</td><td>§9.3</td><td>112</td><td><strong style="color: var(--tab-red);">22 d</strong></td><td>J. Reyes</td><td><span class="status-tag st-pending">Pending Verify</span></td></tr>
+                <tr><td>CAP-1051</td><td class="county-cell">Passaic</td><td>Server room badge access log gap</td><td>§4.3</td><td>108</td><td><strong style="color: var(--tab-red);">18 d</strong></td><td>M. Chen</td><td><span class="status-tag st-open">Open</span></td></tr>
+                <tr><td>CAP-1045</td><td class="county-cell">Salem</td><td>Awareness training expired</td><td>§5.5</td><td>101</td><td><strong style="color: var(--tab-red);">11 d</strong></td><td>P. Okafor</td><td><span class="status-tag st-progress">In Progress</span></td></tr>
+                <tr><td>CAP-1029</td><td class="county-cell">Camden</td><td>Locked file cabinet inventory</td><td>§4.3</td><td>99</td><td><strong style="color: var(--tab-red);">9 d</strong></td><td>J. Reyes</td><td><span class="status-tag st-open">Open</span></td></tr>
+                <tr><td>CAP-1049</td><td class="county-cell">Cumberland</td><td>Media sanitization form incomplete</td><td>§8.3</td><td>97</td><td><strong style="color: var(--tab-red);">7 d</strong></td><td>L. Duarte</td><td><span class="status-tag st-pending">Pending Verify</span></td></tr>
+                <tr><td>CAP-1055</td><td class="county-cell">Passaic</td><td>Encryption key rotation overdue</td><td>§6.3</td><td>94</td><td><strong style="color: var(--tab-red);">4 d</strong></td><td>A. Sharma</td><td><span class="status-tag st-progress">In Progress</span></td></tr>
+                <tr><td>CAP-1061</td><td class="county-cell">Hudson</td><td>Records disposition log</td><td>§3.0</td><td>93</td><td><strong style="color: var(--tab-red);">3 d</strong></td><td>S. Whitman</td><td><span class="status-tag st-open">Open</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- =========== TAB 4: INSPECTOR PERFORMANCE =========== -->
+    <div class="view-panel" data-view="inspectors">
+      <div class="dashboard-title">Inspector Performance & Workload</div>
+      <div class="dashboard-subtitle">Caseload · closure velocity · finding quality</div>
+
+      <div class="highlight-bar">
+        <strong>🎯 Story:</strong> J. Reyes carries 3× the median workload and holds 6 of the 14 overdue CAPs. Redistribution recommended for FY27 planning.
+      </div>
+
+      <div class="row four">
+        <div class="kpi-sheet"><div class="val blue">6</div><div class="lbl">Active Inspectors</div></div>
+        <div class="kpi-sheet"><div class="val orange">5.5</div><div class="lbl">Avg Inspections / Inspector</div></div>
+        <div class="kpi-sheet"><div class="val green">10.5</div><div class="lbl">Avg CAPs / Inspector</div></div>
+        <div class="kpi-sheet"><div class="val purple">47d</div><div class="lbl">Median Closure Time</div></div>
+      </div>
+
+      <div class="row two">
+        <div class="sheet">
+          <div class="sheet-title"><span>Inspector Workload (Inspections vs CAPs)</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="inspectorWorkloadChart"></canvas></div></div>
+        </div>
+        <div class="sheet">
+          <div class="sheet-title"><span>Closure Velocity (Median Days to Close)</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="closureVelocityChart"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="sheet">
+          <div class="sheet-title"><span>Inspector Scorecard</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <table class="data">
+              <thead><tr><th>Inspector</th><th>Region</th><th>Active Insp.</th><th>Open CAPs</th><th>Overdue</th><th>Median Close (d)</th><th>Findings Cited</th><th>Verified %</th></tr></thead>
+              <tbody>
+                <tr><td class="county-cell">J. Reyes</td><td>South</td><td>12</td><td>22</td><td><span style="color: var(--tab-red); font-weight: 700;">6</span></td><td>72</td><td>41</td><td>58%</td></tr>
+                <tr><td class="county-cell">M. Chen</td><td>North</td><td>6</td><td>11</td><td>2</td><td>39</td><td>22</td><td>82%</td></tr>
+                <tr><td class="county-cell">P. Okafor</td><td>South</td><td>5</td><td>9</td><td>2</td><td>44</td><td>18</td><td>78%</td></tr>
+                <tr><td class="county-cell">L. Duarte</td><td>Central</td><td>4</td><td>8</td><td>1</td><td>36</td><td>15</td><td>85%</td></tr>
+                <tr><td class="county-cell">S. Whitman</td><td>North</td><td>4</td><td>7</td><td>2</td><td>41</td><td>13</td><td>77%</td></tr>
+                <tr><td class="county-cell">A. Sharma</td><td>Central</td><td>2</td><td>6</td><td>1</td><td>32</td><td>9</td><td>89%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========== TAB 5: COUNTY DEEP DIVE =========== -->
+    <div class="view-panel" data-view="county">
+      <div class="dashboard-title">County Deep Dive · Camden County CSSA</div>
+      <div class="dashboard-subtitle">Full compliance history and open exposures for a single county</div>
+
+      <div class="highlight-bar">
+        <strong>⚠ Chronic:</strong> Camden has failed §5.5 Awareness Training in <strong>3 consecutive inspection cycles</strong>. Systemic issue — recommend on-site technical assistance.
+      </div>
+
+      <div class="row four">
+        <div class="kpi-sheet"><div class="val red">HIGH</div><div class="lbl">Compliance Rating</div><div class="delta down">unchanged since FY24</div></div>
+        <div class="kpi-sheet"><div class="val orange">8</div><div class="lbl">Open CAPs</div><div class="delta">2 overdue</div></div>
+        <div class="kpi-sheet"><div class="val blue">6</div><div class="lbl">Inspections (3-yr)</div></div>
+        <div class="kpi-sheet"><div class="val purple">82d</div><div class="lbl">Avg CAP Cycle Time</div><div class="delta down">▲ 35d vs state avg</div></div>
+      </div>
+
+      <div class="row two">
+        <div class="sheet">
+          <div class="sheet-title"><span>County Scorecard</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <div class="county-scorecard">
+              <div class="scorecard-item"><span class="k">County Executive</span><span class="v">R. Fernandez</span></div>
+              <div class="scorecard-item"><span class="k">FTI Access Type</span><span class="v">Direct</span></div>
+              <div class="scorecard-item"><span class="k">DSA Effective</span><span class="v">Jan 2024</span></div>
+              <div class="scorecard-item"><span class="k">DSA Expiration</span><span class="v" style="color: var(--tab-red);">Sep 2026</span></div>
+              <div class="scorecard-item"><span class="k">Cases Handled</span><span class="v">18,247</span></div>
+              <div class="scorecard-item"><span class="k">Staff w/ FTI Access</span><span class="v">42</span></div>
+              <div class="scorecard-item"><span class="k">Last Inspection</span><span class="v">May 2026</span></div>
+              <div class="scorecard-item"><span class="k">Next Scheduled</span><span class="v">Nov 2026</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="sheet">
+          <div class="sheet-title"><span>Camden — Findings by Section (Trend)</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="camdenTrendChart"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="row full">
+        <div class="sheet">
+          <div class="sheet-title"><span>Camden Inspection History</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <table class="data">
+              <thead><tr><th>Inspection</th><th>Date</th><th>Inspector</th><th>Findings</th><th>Outcome</th><th>Letter Issued</th><th>CAPs Closed</th></tr></thead>
+              <tbody>
+                <tr><td>INS-2401</td><td>Mar 2024</td><td>J. Reyes</td><td>5</td><td><span class="status-tag st-critical">Non-Compliant</span></td><td>Apr 2024</td><td>5/5</td></tr>
+                <tr><td>INS-2411</td><td>Oct 2024</td><td>J. Reyes</td><td>4</td><td><span class="status-tag st-high">Findings</span></td><td>Nov 2024</td><td>4/4</td></tr>
+                <tr><td>INS-2503</td><td>Mar 2025</td><td>J. Reyes</td><td>6</td><td><span class="status-tag st-critical">Non-Compliant</span></td><td>Apr 2025</td><td>6/6</td></tr>
+                <tr><td>INS-2510</td><td>Sep 2025</td><td>J. Reyes</td><td>3</td><td><span class="status-tag st-high">Findings</span></td><td>Oct 2025</td><td>3/3</td></tr>
+                <tr><td>INS-2601</td><td>Feb 2026</td><td>M. Chen</td><td>5</td><td><span class="status-tag st-critical">Non-Compliant</span></td><td>Mar 2026</td><td>4/5</td></tr>
+                <tr><td>INS-2609</td><td>May 2026</td><td>J. Reyes</td><td>3</td><td><span class="status-tag st-high">Findings</span></td><td>Jun 2026</td><td>0/3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========== TAB 6: COMPLIANCE TREND =========== -->
+    <div class="view-panel" data-view="trend">
+      <div class="dashboard-title">Compliance Trend Analysis · Multi-Year</div>
+      <div class="dashboard-subtitle">Program trajectory, section-level trend, and forecast</div>
+
+      <div class="highlight-bar">
+        <strong>📈 Story:</strong> Compliance climbed from 68% to 87% over three years. §8.3 Media Sanitization failures dropped 60% after FY25 vendor consolidation — the biggest single-driver improvement.
+      </div>
+
+      <div class="row full">
+        <div class="sheet">
+          <div class="sheet-title"><span>Overall Compliance Rate — 3-Year Quarterly</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="trendBigChart"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="row two">
+        <div class="sheet">
+          <div class="sheet-title"><span>Findings by Section — YoY</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="sectionYoYChart"></canvas></div></div>
+        </div>
+        <div class="sheet">
+          <div class="sheet-title"><span>CAP Closure Time — Trend</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="cycleTimeTrendChart"></canvas></div></div>
+        </div>
+      </div>
+
+      <div class="row split">
+        <div class="sheet">
+          <div class="sheet-title"><span>YoY Improvement Ranking</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body">
+            <table class="data">
+              <thead><tr><th>Pub 1075 Section</th><th>FY24</th><th>FY25</th><th>FY26 YTD</th><th>Δ (3-yr)</th></tr></thead>
+              <tbody>
+                <tr><td>§8.3 Media Sanitization</td><td>18</td><td>12</td><td>7</td><td style="color: var(--tab-green); font-weight: 700;">▼ 61%</td></tr>
+                <tr><td>§6.3 Encryption</td><td>7</td><td>5</td><td>3</td><td style="color: var(--tab-green); font-weight: 700;">▼ 57%</td></tr>
+                <tr><td>§4.3 Physical Security</td><td>22</td><td>17</td><td>12</td><td style="color: var(--tab-green); font-weight: 700;">▼ 45%</td></tr>
+                <tr><td>§3 Records</td><td>9</td><td>6</td><td>4</td><td style="color: var(--tab-green); font-weight: 700;">▼ 56%</td></tr>
+                <tr><td>§9.3 Audit Logs</td><td>19</td><td>17</td><td>13</td><td style="color: var(--tab-green); font-weight: 700;">▼ 32%</td></tr>
+                <tr><td>§5.5 Awareness Training</td><td>28</td><td>32</td><td>27</td><td style="color: var(--tab-red); font-weight: 700;">▲ negligible</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="sheet">
+          <div class="sheet-title"><span>Forecast — FY27 Compliance</span><div class="actions"><span>⋮</span></div></div>
+          <div class="sheet-body"><div class="chart-wrap tall"><canvas id="forecastChart"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- Sheet tabs -->
-<div class="sheet-tabs">
-  <div class="sheet-tab active">Executive Overview</div>
-  <div class="sheet-tab">County Deep Dive</div>
-  <div class="sheet-tab">Findings Detail</div>
-  <div class="sheet-tab">Inspector Performance</div>
-  <div class="sheet-tab">CAP Aging</div>
-  <div class="sheet-tab">Compliance Trend</div>
-  <div class="tab-controls">
-    <span>◀</span><span>▶</span><span>▤</span>
-  </div>
+<div class="sheet-tabs" id="sheet-tabs">
+  <div class="sheet-tab active" data-target="overview">Executive Overview</div>
+  <div class="sheet-tab" data-target="heatmap">Findings Heatmap</div>
+  <div class="sheet-tab" data-target="aging">CAP Aging</div>
+  <div class="sheet-tab" data-target="inspectors">Inspector Performance</div>
+  <div class="sheet-tab" data-target="county">County Deep Dive</div>
+  <div class="sheet-tab" data-target="trend">Compliance Trend</div>
+  <div class="tab-controls"><span>◀</span><span>▶</span><span>▤</span></div>
 </div>
 
-<!-- Status bar -->
 <div class="status-bar">
-  <div>218 marks · 6 rows by 8 columns · SUM(CAP Count): 63</div>
+  <div id="status-metrics">218 marks · 21 rows by 6 columns · SUM(CAP Count): 63</div>
   <div>Server: nj-tableau.gov · Site: OCSS · <a href="#" style="color: var(--link); text-decoration: none;">Data Details</a></div>
 </div>
 
 <script>
-  Chart.defaults.font.family = 'Source Sans 3, Helvetica Neue, Arial, sans-serif';
-  Chart.defaults.font.size = 11;
-  Chart.defaults.color = '#666666';
-  Chart.defaults.borderColor = '#e0e0e0';
+Chart.defaults.font.family = 'Source Sans 3, Helvetica Neue, Arial, sans-serif';
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#666666';
+Chart.defaults.borderColor = '#e0e0e0';
 
-  // Trend
-  new Chart(document.getElementById('trendChart'), {
-    type: 'line',
-    data: {
-      labels: ['FY24 Q1','Q2','Q3','Q4','FY25 Q1','Q2','Q3','Q4','FY26 Q1','Q2','Q3'],
-      datasets: [{
-        label: 'Compliance %',
-        data: [68, 71, 70, 74, 76, 78, 81, 83, 84, 86, 87],
-        borderColor: '#1f77b4',
-        backgroundColor: 'rgba(31, 119, 180, 0.15)',
-        fill: true,
-        tension: 0.25,
-        pointRadius: 3,
-        pointBackgroundColor: '#1f77b4',
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } },
-        x: { grid: { display: false } }
-      }
-    }
+// ================= Data =================
+const COUNTIES = [
+  { name: 'Camden', open: 8, rating: 'High' },
+  { name: 'Cumberland', open: 6, rating: 'High' },
+  { name: 'Passaic', open: 7, rating: 'High' },
+  { name: 'Salem', open: 5, rating: 'High' },
+  { name: 'Essex', open: 4, rating: 'Medium' },
+  { name: 'Hudson', open: 4, rating: 'Medium' },
+  { name: 'Mercer', open: 3, rating: 'Medium' },
+  { name: 'Atlantic', open: 3, rating: 'Medium' },
+  { name: 'Ocean', open: 3, rating: 'Medium' },
+  { name: 'Union', open: 2, rating: 'Medium' },
+  { name: 'Warren', open: 2, rating: 'Medium' },
+  { name: 'Gloucester', open: 2, rating: 'Medium' },
+  { name: 'Bergen', open: 1, rating: 'Low' },
+  { name: 'Middlesex', open: 1, rating: 'Low' },
+  { name: 'Morris', open: 1, rating: 'Low' },
+  { name: 'Monmouth', open: 1, rating: 'Low' },
+  { name: 'Somerset', open: 0, rating: 'Low' },
+  { name: 'Burlington', open: 0, rating: 'Low' },
+  { name: 'Hunterdon', open: 0, rating: 'Low' },
+  { name: 'Sussex', open: 0, rating: 'Low' },
+  { name: 'Cape May', open: 0, rating: 'Low' }
+];
+
+// SVG paths for a stylized NJ (bounding box 400x500)
+const NJ_PATHS = {
+  'Sussex':      'M 60 20 L 130 25 L 135 65 L 65 70 Z',
+  'Passaic':     'M 130 25 L 200 20 L 205 60 L 215 90 L 145 85 L 135 65 Z',
+  'Bergen':      'M 205 60 L 260 55 L 275 100 L 220 110 L 215 90 Z',
+  'Warren':      'M 65 70 L 135 65 L 145 85 L 155 130 L 90 135 Z',
+  'Morris':      'M 145 85 L 215 90 L 220 110 L 210 145 L 155 130 Z',
+  'Hudson':      'M 260 55 L 285 65 L 290 115 L 275 100 Z',
+  'Essex':       'M 220 110 L 275 100 L 285 145 L 225 155 L 210 145 Z',
+  'Union':       'M 225 155 L 285 145 L 295 180 L 235 195 L 220 175 Z',
+  'Hunterdon':   'M 90 135 L 155 130 L 165 175 L 100 185 Z',
+  'Somerset':    'M 155 130 L 210 145 L 220 175 L 205 205 L 165 175 Z',
+  'Middlesex':   'M 205 205 L 235 195 L 295 180 L 300 225 L 240 250 L 200 235 Z',
+  'Mercer':      'M 100 185 L 165 175 L 205 205 L 200 235 L 130 245 Z',
+  'Monmouth':    'M 240 250 L 300 225 L 335 250 L 320 305 L 260 300 Z',
+  'Burlington':  'M 130 245 L 200 235 L 240 250 L 260 300 L 210 340 L 145 305 Z',
+  'Ocean':       'M 260 300 L 320 305 L 315 380 L 280 430 L 240 400 L 220 360 Z',
+  'Camden':      'M 100 285 L 145 305 L 155 340 L 115 355 L 90 325 Z',
+  'Gloucester':  'M 70 320 L 100 285 L 90 325 L 115 355 L 85 375 L 60 355 Z',
+  'Salem':       'M 30 340 L 70 320 L 85 375 L 55 400 L 25 385 Z',
+  'Atlantic':    'M 145 305 L 210 340 L 220 360 L 240 400 L 200 435 L 155 400 L 130 360 Z',
+  'Cumberland':  'M 55 400 L 85 375 L 115 355 L 130 360 L 120 410 L 75 425 Z',
+  'Cape May':    'M 120 410 L 155 400 L 200 435 L 175 465 L 130 460 L 115 435 Z'
+};
+
+function colorFor(open) {
+  if (open >= 8) return '#7f1d1d';
+  if (open >= 6) return '#b91c1c';
+  if (open >= 4) return '#d97706';
+  if (open >= 2) return '#eab308';
+  if (open >= 1) return '#65a30d';
+  return '#166534';
+}
+
+// Render NJ map
+(function renderMap() {
+  const svg = document.getElementById('nj-map');
+  const tt = document.getElementById('map-tooltip');
+  if (!svg) return;
+  const cData = Object.fromEntries(COUNTIES.map(c => [c.name, c]));
+  Object.entries(NJ_PATHS).forEach(([name, d]) => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const c = cData[name] || { open: 0, rating: '—' };
+    path.setAttribute('d', d);
+    path.setAttribute('fill', colorFor(c.open));
+    path.setAttribute('data-name', name);
+    path.addEventListener('mousemove', (e) => {
+      const rect = svg.parentElement.getBoundingClientRect();
+      tt.style.left = (e.clientX - rect.left + 12) + 'px';
+      tt.style.top = (e.clientY - rect.top + 12) + 'px';
+      tt.style.display = 'block';
+      tt.innerHTML = `
+        <div class="tt-name">${name} County</div>
+        <div class="tt-row"><span class="k">Open CAPs</span><span>${c.open}</span></div>
+        <div class="tt-row"><span class="k">Rating</span><span>${c.rating}</span></div>
+        <div class="tt-row"><span class="k">Region</span><span>${['Bergen','Passaic','Sussex','Morris','Warren','Hudson','Essex'].includes(name) ? 'North' : ['Camden','Cumberland','Salem','Gloucester','Atlantic','Cape May','Burlington'].includes(name) ? 'South' : 'Central'}</span></div>`;
+    });
+    path.addEventListener('mouseleave', () => { tt.style.display = 'none'; });
+    svg.appendChild(path);
+
+    // County label
+    const bbox = path.getBBox ? null : null; // getBBox needs the element in DOM
   });
 
-  // Findings bar
-  new Chart(document.getElementById('findingsChart'), {
-    type: 'bar',
-    data: {
-      labels: ['§5.5 Training','§4.3 Physical','§9.3 Audit Logs','§8.3 Media','§3 Records','§6.3 Encryption','Other'],
-      datasets: [{
-        label: 'Findings',
-        data: [87, 51, 48, 32, 18, 8, 4],
-        backgroundColor: ['#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#2ca02c','#7f7f7f'],
-        borderRadius: 0,
-        barThickness: 18
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-        y: { grid: { display: false } }
-      }
-    }
+  // Add labels after paths so labels sit on top
+  requestAnimationFrame(() => {
+    svg.querySelectorAll('path').forEach(p => {
+      const box = p.getBBox();
+      const cx = box.x + box.width / 2;
+      const cy = box.y + box.height / 2;
+      const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', cx);
+      label.setAttribute('y', cy);
+      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('dominant-baseline', 'middle');
+      label.setAttribute('fill', 'white');
+      label.setAttribute('font-size', '9');
+      label.setAttribute('font-weight', '600');
+      label.setAttribute('pointer-events', 'none');
+      label.textContent = p.getAttribute('data-name');
+      svg.appendChild(label);
+    });
   });
+})();
 
-  // Workload
-  new Chart(document.getElementById('workloadChart'), {
-    type: 'bar',
-    data: {
-      labels: ['J. Reyes','M. Chen','P. Okafor','L. Duarte','S. Whitman','A. Sharma'],
-      datasets: [
-        { label: 'Active Inspections', data: [12, 6, 5, 4, 4, 2], backgroundColor: '#1f77b4' },
-        { label: 'Open CAPs', data: [22, 11, 9, 8, 7, 6], backgroundColor: '#ff7f0e' }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-      },
-      scales: {
-        y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-        x: { grid: { display: false } }
-      }
-    }
+// Render heatmap
+(function renderHeatmap() {
+  const sections = ['§3 Records','§4.3 Physical','§5.5 Training','§6.3 Encryption','§8.3 Media','§9.3 Audit Logs'];
+  // deterministic pseudo-random per county x section, weighted by rating
+  const weights = { 'High': 1.8, 'Medium': 1.0, 'Low': 0.35 };
+  const trainingBias = { 'High': 3.5, 'Medium': 2.0, 'Low': 0.7 };
+  function hash(s) { let h = 0; for (let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) & 0xffff; return h; }
+  function cellCount(county, section, rating) {
+    const w = weights[rating];
+    const bias = section === '§5.5 Training' ? trainingBias[rating] : 0;
+    const raw = ((hash(county + section) % 100) / 100) * 6 * w + bias;
+    return Math.max(0, Math.round(raw));
+  }
+  function cellColor(v) {
+    if (v === 0) return '#eef2f7';
+    if (v <= 2) return '#a6cbe3';
+    if (v <= 4) return '#6baed6';
+    if (v <= 6) return '#2171b5';
+    return '#08306b';
+  }
+  const table = document.getElementById('heatmap');
+  if (!table) return;
+  let html = '<thead><tr><th>County</th>';
+  sections.forEach(s => html += `<th class="col">${s}</th>`);
+  html += '<th style="text-align:right">Total</th></tr></thead><tbody>';
+  const sorted = COUNTIES.slice().sort((a,b) => b.open - a.open);
+  sorted.forEach(c => {
+    let rowTotal = 0;
+    let row = `<tr><td class="county">${c.name}</td>`;
+    sections.forEach(s => {
+      const v = cellCount(c.name, s, c.rating);
+      rowTotal += v;
+      row += `<td class="cell" style="background: ${cellColor(v)}; color: ${v > 3 ? 'white' : '#333'};">${v || ''}</td>`;
+    });
+    row += `<td class="total">${rowTotal}</td></tr>`;
+    html += row;
   });
+  html += '</tbody>';
+  table.innerHTML = html;
+})();
 
-  // Seasonality
-  new Chart(document.getElementById('seasonChart'), {
-    type: 'line',
-    data: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      datasets: [
-        { label: 'FY24', data: [2,3,7,4,3,2,3,4,8,5,2,1], borderColor: '#c7c7c7', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
-        { label: 'FY25', data: [3,4,9,5,4,3,4,5,10,6,3,2], borderColor: '#7f7f7f', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
-        { label: 'FY26', data: [4,5,11,6,5,4,5,null,null,null,null,null], borderColor: '#1f77b4', backgroundColor: 'rgba(31, 119, 180, 0.1)', fill: true, tension: 0.25, pointRadius: 3, borderWidth: 2 }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-      },
-      scales: {
-        y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-        x: { grid: { display: false } }
-      }
-    }
+// ================= Tab switching =================
+document.querySelectorAll('#sheet-tabs .sheet-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.getAttribute('data-target');
+    document.querySelectorAll('#sheet-tabs .sheet-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.view-panel[data-view="${target}"]`).classList.add('active');
+    document.getElementById('current-view').textContent = tab.textContent.trim();
+    document.getElementById('view-title').textContent = 'Safeguard Program — ' + tab.textContent.trim();
+    window.scrollTo({top: 0, behavior: 'smooth'});
   });
+});
+
+// ================= Charts =================
+new Chart(document.getElementById('trendChart'), {
+  type: 'line',
+  data: {
+    labels: ['FY24 Q1','Q2','Q3','Q4','FY25 Q1','Q2','Q3','Q4','FY26 Q1','Q2','Q3'],
+    datasets: [{ label: 'Compliance %', data: [68,71,70,74,76,78,81,83,84,86,87],
+      borderColor: '#1f77b4', backgroundColor: 'rgba(31,119,180,0.15)', fill: true,
+      tension: 0.25, pointRadius: 3, pointBackgroundColor: '#1f77b4', borderWidth: 2 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+new Chart(document.getElementById('findingsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['§5.5 Training','§4.3 Physical','§9.3 Audit Logs','§8.3 Media','§3 Records','§6.3 Encryption','Other'],
+    datasets: [{ label: 'Findings', data: [87,51,48,32,18,8,4],
+      backgroundColor: ['#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#2ca02c','#7f7f7f'], barThickness: 18 }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { beginAtZero: true, grid: { color: '#f0f0f0' } }, y: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('workloadChart'), {
+  type: 'bar',
+  data: {
+    labels: ['J. Reyes','M. Chen','P. Okafor','L. Duarte','S. Whitman','A. Sharma'],
+    datasets: [
+      { label: 'Active Inspections', data: [12,6,5,4,4,2], backgroundColor: '#1f77b4' },
+      { label: 'Open CAPs', data: [22,11,9,8,7,6], backgroundColor: '#ff7f0e' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('seasonChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [
+      { label: 'FY24', data: [2,3,7,4,3,2,3,4,8,5,2,1], borderColor: '#c7c7c7', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
+      { label: 'FY25', data: [3,4,9,5,4,3,4,5,10,6,3,2], borderColor: '#7f7f7f', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
+      { label: 'FY26', data: [4,5,11,6,5,4,5,null,null,null,null,null], borderColor: '#1f77b4', backgroundColor: 'rgba(31,119,180,0.1)', fill: true, tension: 0.25, pointRadius: 3, borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// ============ Heatmap tab charts ============
+new Chart(document.getElementById('sectionDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['§5.5 Training','§4.3 Physical','§9.3 Audit','§8.3 Media','§3 Records','§6.3 Encryption'],
+    datasets: [{ data: [87,51,48,32,18,8],
+      backgroundColor: ['#d62728','#ff7f0e','#e6a13d','#1f77b4','#5aa3d6','#2ca02c'] }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '55%',
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } } }
+  }
+});
+
+// ============ Aging tab charts ============
+new Chart(document.getElementById('agingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0–15d','16–30d','31–45d','46–60d','61–75d','76–90d','91–120d','120d+'],
+    datasets: [{
+      label: 'Open CAPs',
+      data: [14, 14, 12, 9, 8, 6, 9, 5],
+      backgroundColor: ['#2ca02c','#2ca02c','#1f77b4','#1f77b4','#ff7f0e','#ff7f0e','#d62728','#7f1d1d']
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('overdueByCountyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Camden','Cumberland','Passaic','Salem','Hudson','Essex','Others'],
+    datasets: [{ label: 'Overdue', data: [4,3,2,2,1,1,1], backgroundColor: '#d62728' }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { beginAtZero: true, grid: { color: '#f0f0f0' } }, y: { grid: { display: false } } }
+  }
+});
+
+// ============ Inspector tab charts ============
+new Chart(document.getElementById('inspectorWorkloadChart'), {
+  type: 'bar',
+  data: {
+    labels: ['J. Reyes','M. Chen','P. Okafor','L. Duarte','S. Whitman','A. Sharma'],
+    datasets: [
+      { label: 'Active Inspections', data: [12,6,5,4,4,2], backgroundColor: '#1f77b4' },
+      { label: 'Open CAPs', data: [22,11,9,8,7,6], backgroundColor: '#ff7f0e' },
+      { label: 'Overdue', data: [6,2,2,1,2,1], backgroundColor: '#d62728' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, stacked: false, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('closureVelocityChart'), {
+  type: 'bar',
+  data: {
+    labels: ['A. Sharma','L. Duarte','M. Chen','S. Whitman','P. Okafor','J. Reyes'],
+    datasets: [{
+      label: 'Median Days to Close',
+      data: [32,36,39,41,44,72],
+      backgroundColor: ['#2ca02c','#2ca02c','#2ca02c','#1f77b4','#ff7f0e','#d62728']
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { beginAtZero: true, grid: { color: '#f0f0f0' } }, y: { grid: { display: false } } }
+  }
+});
+
+// ============ County deep dive ============
+new Chart(document.getElementById('camdenTrendChart'), {
+  type: 'bar',
+  data: {
+    labels: ['§5.5','§4.3','§9.3','§8.3','§3','§6.3'],
+    datasets: [
+      { label: 'FY24', data: [4,3,2,2,1,0], backgroundColor: '#c7c7c7' },
+      { label: 'FY25', data: [5,3,2,1,1,0], backgroundColor: '#7f7f7f' },
+      { label: 'FY26', data: [4,2,2,0,0,0], backgroundColor: '#d62728' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// ============ Trend tab charts ============
+new Chart(document.getElementById('trendBigChart'), {
+  type: 'line',
+  data: {
+    labels: ['FY24 Q1','Q2','Q3','Q4','FY25 Q1','Q2','Q3','Q4','FY26 Q1','Q2','Q3'],
+    datasets: [
+      { label: 'Compliance %', data: [68,71,70,74,76,78,81,83,84,86,87],
+        borderColor: '#1f77b4', backgroundColor: 'rgba(31,119,180,0.12)', fill: true, tension: 0.25, borderWidth: 2, pointRadius: 3 },
+      { label: 'Target (90%)', data: Array(11).fill(90),
+        borderColor: '#2ca02c', borderDash: [4,4], borderWidth: 1.5, pointRadius: 0, fill: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('sectionYoYChart'), {
+  type: 'line',
+  data: {
+    labels: ['FY24','FY25','FY26 YTD'],
+    datasets: [
+      { label: '§5.5 Training', data: [28,32,27], borderColor: '#d62728', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 },
+      { label: '§4.3 Physical', data: [22,17,12], borderColor: '#ff7f0e', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 },
+      { label: '§9.3 Audit Logs', data: [19,17,13], borderColor: '#e6a13d', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 },
+      { label: '§8.3 Media', data: [18,12,7], borderColor: '#1f77b4', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 },
+      { label: '§3 Records', data: [9,6,4], borderColor: '#5aa3d6', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 },
+      { label: '§6.3 Encryption', data: [7,5,3], borderColor: '#2ca02c', backgroundColor: 'transparent', tension: 0.2, borderWidth: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('cycleTimeTrendChart'), {
+  type: 'bar',
+  data: {
+    labels: ['FY24 Q1','Q2','Q3','Q4','FY25 Q1','Q2','Q3','Q4','FY26 Q1','Q2','Q3'],
+    datasets: [{ label: 'Median Days', data: [82,79,76,72,68,65,60,58,55,50,47], backgroundColor: '#1f77b4' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => v + 'd' }, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('forecastChart'), {
+  type: 'line',
+  data: {
+    labels: ['FY24','FY25','FY26 YTD','FY27 (Fcst)','FY28 (Fcst)'],
+    datasets: [
+      { label: 'Actual', data: [72,80,87,null,null], borderColor: '#1f77b4', backgroundColor: 'rgba(31,119,180,0.15)', fill: true, tension: 0.25, borderWidth: 2, pointRadius: 4 },
+      { label: 'Forecast', data: [null,null,87,91,94], borderColor: '#9467bd', borderDash: [5,5], backgroundColor: 'transparent', tension: 0.25, borderWidth: 2, pointRadius: 4 },
+      { label: 'Target', data: [90,90,90,90,90], borderColor: '#2ca02c', borderDash: [2,2], backgroundColor: 'transparent', pointRadius: 0, borderWidth: 1.5 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
 </script>
 
 </body>
