@@ -370,16 +370,35 @@
     <!-- =========== TAB 1: EXECUTIVE OVERVIEW =========== -->
     <div class="view-panel active" data-view="overview">
       <div class="dashboard-title">Safeguard Program Health · IRS Pub 1075 Compliance</div>
-      <div class="dashboard-subtitle">Reporting period: FY 2024 – FY 2026 YTD · All 21 New Jersey Counties</div>
+      <div class="dashboard-subtitle">Reporting period: FY 2024 – FY 2026 YTD · All 21 New Jersey Counties · Multi-source blend</div>
+
+      <!-- Data source ribbon -->
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; padding: 8px 12px; background: #f8f8f8; border: 1px solid var(--chrome-border-light); font-size: 11px;">
+        <span style="font-weight: 700; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.5px;">Blended Data Sources:</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #1f77b4; color: #1f77b4; border-radius: 12px; font-weight: 600;">● Salesforce</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #ff7f0e; color: #ff7f0e; border-radius: 12px; font-weight: 600;">● Workday HR</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #2ca02c; color: #2ca02c; border-radius: 12px; font-weight: 600;">● Cornerstone LMS</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #d62728; color: #d62728; border-radius: 12px; font-weight: 600;">● Splunk SIEM</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #9467bd; color: #9467bd; border-radius: 12px; font-weight: 600;">● ServiceNow</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #17becf; color: #17becf; border-radius: 12px; font-weight: 600;">● Lenel Badge</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #8c564b; color: #8c564b; border-radius: 12px; font-weight: 600;">● IRS SIRT Portal</span>
+        <span style="padding: 3px 8px; background: white; border: 1px solid #7f7f7f; color: #7f7f7f; border-radius: 12px; font-weight: 600;">● NJ CSE Case Mgmt</span>
+        <span style="margin-left: auto; color: var(--ink-muted); font-size: 10px;">Blended via Tableau Prep · Refreshed 12 min ago</span>
+      </div>
 
       <div class="content-grid">
         <div>
           <div class="kpi-row">
-            <div class="kpi-sheet"><div class="val green">87%</div><div class="lbl">Compliance Rate</div><div class="delta up">▲ 6.2 pts vs FY25</div></div>
-            <div class="kpi-sheet"><div class="val blue">124</div><div class="lbl">Inspections (3-yr)</div><div class="delta">42 in FY26 YTD</div></div>
-            <div class="kpi-sheet"><div class="val orange">63</div><div class="lbl">Open CAPs</div><div class="delta">17 counties</div></div>
-            <div class="kpi-sheet"><div class="val red">14</div><div class="lbl">Overdue CAPs</div><div class="delta down">▲ 3 vs last month</div></div>
-            <div class="kpi-sheet"><div class="val blue">47d</div><div class="lbl">Avg Cycle Time</div><div class="delta up">▼ 18d vs FY25</div></div>
+            <div class="kpi-sheet"><div class="val green">87%</div><div class="lbl">Compliance Rate <span style="color:#1f77b4;">●</span></div><div class="delta up">▲ 6.2 pts vs FY25</div></div>
+            <div class="kpi-sheet"><div class="val orange">73%</div><div class="lbl">FTI Training Complete <span style="color:#2ca02c;">●</span></div><div class="delta down">▼ 4 pts vs FY25</div></div>
+            <div class="kpi-sheet"><div class="val red">14</div><div class="lbl">Overdue CAPs <span style="color:#1f77b4;">●</span></div><div class="delta down">▲ 3 this month</div></div>
+            <div class="kpi-sheet"><div class="val purple">42</div><div class="lbl">FTI-Related Incidents <span style="color:#9467bd;">●</span></div><div class="delta">ServiceNow · YTD</div></div>
+            <div class="kpi-sheet"><div class="val blue">2.4M</div><div class="lbl">Cases Handled <span style="color:#7f7f7f;">●</span></div><div class="delta">NJ CSE · Active FY26</div></div>
+          </div>
+
+          <!-- Cross-source correlation callout -->
+          <div style="background: #eef7ff; border: 1px solid #b6d9f2; padding: 10px 14px; font-size: 12px; color: #1e4666; margin-bottom: 12px; border-radius: 2px;">
+            <strong>🔗 Cross-source insight:</strong> Counties below <strong>70% training completion</strong> in Cornerstone LMS account for <strong>78% of §5.5 findings</strong> in Salesforce. Training gap is the leading indicator of the leading finding.
           </div>
 
           <div class="row two">
@@ -423,12 +442,68 @@
 
           <div class="row split">
             <div class="sheet">
-              <div class="sheet-title"><span>Inspector Workload Distribution</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-title"><span>Inspector Workload Distribution <span style="color:#1f77b4;">●</span> Salesforce</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
               <div class="sheet-body"><div class="chart-wrap"><canvas id="workloadChart"></canvas></div></div>
             </div>
             <div class="sheet">
-              <div class="sheet-title"><span>Inspection Volume · Monthly Seasonality</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-title"><span>Inspection Volume · Monthly Seasonality <span style="color:#1f77b4;">●</span> Salesforce</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
               <div class="sheet-body"><div class="chart-wrap"><canvas id="seasonChart"></canvas></div></div>
+            </div>
+          </div>
+
+          <!-- ==== External data blend row 1 ==== -->
+          <div class="row three">
+            <div class="sheet">
+              <div class="sheet-title"><span>FTI Training Completion <span style="color:#2ca02c;">●</span> Cornerstone LMS</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="trainingChart"></canvas></div></div>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>Security Incidents by Type <span style="color:#d62728;">●</span> Splunk SIEM</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="incidentsChart"></canvas></div></div>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>FTI Incident Tickets <span style="color:#9467bd;">●</span> ServiceNow</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="ticketsChart"></canvas></div></div>
+            </div>
+          </div>
+
+          <!-- ==== External data blend row 2 ==== -->
+          <div class="row three">
+            <div class="sheet">
+              <div class="sheet-title"><span>FTI-Access Staff Turnover <span style="color:#ff7f0e;">●</span> Workday HR</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="turnoverChart"></canvas></div></div>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>After-Hours Badge Access <span style="color:#17becf;">●</span> Lenel Badge</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="badgeChart"></canvas></div></div>
+            </div>
+            <div class="sheet">
+              <div class="sheet-title"><span>NJ Case Volume vs FTI Access <span style="color:#7f7f7f;">●</span> NJ CSE + Salesforce</span><div class="actions"><span>⋮</span></div></div>
+              <div class="sheet-body"><div class="chart-wrap"><canvas id="caseVolumeChart"></canvas></div></div>
+            </div>
+          </div>
+
+          <!-- ==== Cross-source correlation matrix ==== -->
+          <div class="row full">
+            <div class="sheet">
+              <div class="sheet-title"><span>County Risk Composite — All Sources Blended</span><div class="actions"><span>▾</span><span>⋮</span></div></div>
+              <div class="sheet-body">
+                <div style="font-size: 11px; color: var(--ink-muted); margin-bottom: 8px;">Composite risk score = weighted blend of Salesforce inspections, LMS training rate, Splunk incidents, Workday turnover, and Badge anomalies. Higher = riskier.</div>
+                <table class="data">
+                  <thead><tr><th>County</th><th>Inspections<br><span style="font-weight:400;color:#1f77b4;">Salesforce</span></th><th>Training %<br><span style="font-weight:400;color:#2ca02c;">LMS</span></th><th>Incidents<br><span style="font-weight:400;color:#d62728;">Splunk</span></th><th>Turnover<br><span style="font-weight:400;color:#ff7f0e;">Workday</span></th><th>Badge Anom.<br><span style="font-weight:400;color:#17becf;">Lenel</span></th><th>Open CAPs<br><span style="font-weight:400;color:#1f77b4;">Salesforce</span></th><th style="text-align:center;">Composite Risk</th></tr></thead>
+                  <tbody>
+                    <tr><td class="county-cell">Camden</td><td>6</td><td style="color:var(--tab-red);font-weight:700;">58%</td><td>11</td><td style="color:var(--tab-red);font-weight:700;">24%</td><td>7</td><td>8</td><td><span class="status-tag st-critical">92 · Critical</span></td></tr>
+                    <tr><td class="county-cell">Cumberland</td><td>5</td><td style="color:var(--tab-red);font-weight:700;">61%</td><td>9</td><td>18%</td><td>5</td><td>6</td><td><span class="status-tag st-critical">87 · Critical</span></td></tr>
+                    <tr><td class="county-cell">Passaic</td><td>6</td><td style="color:var(--tab-orange);font-weight:700;">67%</td><td>7</td><td>16%</td><td>4</td><td>7</td><td><span class="status-tag st-high">78 · High</span></td></tr>
+                    <tr><td class="county-cell">Salem</td><td>4</td><td style="color:var(--tab-orange);font-weight:700;">69%</td><td>5</td><td>15%</td><td>3</td><td>5</td><td><span class="status-tag st-high">71 · High</span></td></tr>
+                    <tr><td class="county-cell">Essex</td><td>7</td><td>78%</td><td>4</td><td>11%</td><td>2</td><td>4</td><td><span class="status-tag st-open">52 · Med</span></td></tr>
+                    <tr><td class="county-cell">Hudson</td><td>6</td><td>81%</td><td>3</td><td>10%</td><td>2</td><td>4</td><td><span class="status-tag st-open">44 · Med</span></td></tr>
+                    <tr><td class="county-cell">Bergen</td><td>7</td><td style="color:var(--tab-green);font-weight:700;">94%</td><td>1</td><td>6%</td><td>0</td><td>1</td><td><span class="status-tag st-resolved">14 · Low</span></td></tr>
+                    <tr><td class="county-cell">Somerset</td><td>5</td><td style="color:var(--tab-green);font-weight:700;">97%</td><td>0</td><td>4%</td><td>0</td><td>0</td><td><span class="status-tag st-resolved">6 · Low</span></td></tr>
+                  </tbody>
+                </table>
+                <div class="caption">Composite formula: 0.30 × Findings + 0.25 × (100 − Training%) + 0.15 × Incidents + 0.15 × Turnover% + 0.10 × Badge Anomalies + 0.05 × Open CAPs</div>
+              </div>
             </div>
           </div>
         </div>
@@ -971,6 +1046,122 @@ new Chart(document.getElementById('seasonChart'), {
     responsive: true, maintainAspectRatio: false,
     plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
     scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// ============ External data blend charts ============
+new Chart(document.getElementById('trainingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Camden','Cumberland','Passaic','Salem','Essex','Hudson','Statewide','Bergen','Somerset'],
+    datasets: [{
+      label: 'Training Completion %',
+      data: [58, 61, 67, 69, 78, 81, 83, 94, 97],
+      backgroundColor: ['#d62728','#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#7f7f7f','#2ca02c','#2ca02c']
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } }, y: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('incidentsChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Unauthorized Access','Data Exfil Attempt','Phishing','Malware','Policy Violation','Other'],
+    datasets: [{
+      data: [12, 3, 18, 5, 9, 4],
+      backgroundColor: ['#d62728','#7f1d1d','#ff7f0e','#e6a13d','#1f77b4','#7f7f7f']
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, cutout: '55%',
+    plugins: { legend: { position: 'right', labels: { boxWidth: 8, font: { size: 9 } } } }
+  }
+});
+
+new Chart(document.getElementById('ticketsChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+    datasets: [
+      { label: 'Opened', data: [6, 8, 12, 9, 11, 7, 8], borderColor: '#9467bd', backgroundColor: 'rgba(148,103,189,0.12)', fill: true, tension: 0.25, borderWidth: 2, pointRadius: 3 },
+      { label: 'Resolved', data: [4, 6, 10, 8, 9, 8, 7], borderColor: '#2ca02c', backgroundColor: 'transparent', tension: 0.25, borderWidth: 2, pointRadius: 3 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('turnoverChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Camden','Cumberland','Passaic','Salem','Essex','Bergen'],
+    datasets: [
+      { label: 'FY24', data: [18, 15, 14, 12, 10, 6], backgroundColor: '#c7c7c7' },
+      { label: 'FY25', data: [21, 17, 15, 13, 11, 6], backgroundColor: '#7f7f7f' },
+      { label: 'FY26 YTD', data: [24, 18, 16, 15, 11, 6], backgroundColor: '#ff7f0e' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('badgeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    datasets: [
+      { label: 'Business Hours', data: [420, 435, 428, 440, 415, 45, 22], backgroundColor: '#1f77b4' },
+      { label: 'After Hours', data: [18, 22, 25, 20, 32, 12, 8], backgroundColor: '#d62728' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+    scales: { y: { beginAtZero: true, stacked: true, grid: { color: '#f0f0f0' } }, x: { stacked: true, grid: { display: false } } }
+  }
+});
+
+new Chart(document.getElementById('caseVolumeChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [{
+      label: 'Counties',
+      data: [
+        { x: 18247, y: 42, r: 12, county: 'Camden' },
+        { x: 15320, y: 38, r: 10, county: 'Cumberland' },
+        { x: 24100, y: 52, r: 14, county: 'Passaic' },
+        { x: 32800, y: 58, r: 16, county: 'Essex' },
+        { x: 28500, y: 55, r: 15, county: 'Hudson' },
+        { x: 41200, y: 68, r: 18, county: 'Bergen' },
+        { x: 9800, y: 24, r: 7, county: 'Salem' },
+        { x: 22400, y: 46, r: 12, county: 'Middlesex' },
+        { x: 18900, y: 41, r: 11, county: 'Monmouth' },
+        { x: 12300, y: 30, r: 9, county: 'Ocean' }
+      ],
+      backgroundColor: 'rgba(31,119,180,0.5)',
+      borderColor: '#1f77b4'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: (ctx) => `${ctx.raw.county}: ${ctx.raw.x.toLocaleString()} cases · ${ctx.raw.y} staff` } }
+    },
+    scales: {
+      y: { title: { display: true, text: 'FTI Access Staff', font: { size: 10 } }, grid: { color: '#f0f0f0' } },
+      x: { title: { display: true, text: 'Cases Handled (FY26)', font: { size: 10 } }, grid: { color: '#f0f0f0' } }
+    }
   }
 });
 
