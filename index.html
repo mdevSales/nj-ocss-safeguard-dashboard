@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NJ OCSS Safeguard Program - Tableau Server</title>
+<script src="chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tab-blue: #1f77b4;
+    --tab-orange: #ff7f0e;
+    --tab-red: #d62728;
+    --tab-green: #2ca02c;
+    --tab-purple: #9467bd;
+    --tab-brown: #8c564b;
+    --tab-pink: #e377c2;
+    --tab-gray: #7f7f7f;
+    --tab-olive: #bcbd22;
+    --tab-teal: #17becf;
+
+    --chrome-dark: #333333;
+    --chrome-mid: #4a4a4a;
+    --chrome-light: #f5f5f5;
+    --chrome-border: #cccccc;
+    --chrome-border-light: #e0e0e0;
+
+    --toolbar-bg: #ffffff;
+    --page-bg: #f4f4f4;
+
+    --ink: #333333;
+    --ink-muted: #666666;
+    --link: #0071b5;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--page-bg);
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  /* ===== Tableau Server Top Nav ===== */
+  .server-nav {
+    background: var(--chrome-dark);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 44px;
+    font-size: 13px;
+  }
+  .server-nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    margin-right: 24px;
+    color: white;
+  }
+  .server-nav .logo-mark {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: linear-gradient(135deg, #1f77b4 0%, #ff7f0e 100%);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 11px;
+  }
+  .server-nav .nav-links { display: flex; gap: 4px; }
+  .server-nav .nav-links a {
+    color: #cfcfcf;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .server-nav .nav-links a.active {
+    background: #4a4a4a;
+    color: white;
+  }
+  .server-nav .nav-links a:hover { color: white; }
+  .server-nav .right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .server-nav .search {
+    background: #4a4a4a;
+    border: 1px solid #5a5a5a;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    width: 220px;
+  }
+  .server-nav .search::placeholder { color: #999; }
+  .server-nav .icon-btn {
+    color: #cfcfcf;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .server-nav .avatar {
+    width: 26px; height: 26px;
+    background: var(--tab-blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  /* ===== Breadcrumb bar ===== */
+  .breadcrumb {
+    background: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--chrome-border);
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .breadcrumb a { color: var(--link); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: #999; }
+  .breadcrumb .current { color: var(--ink); font-weight: 600; }
+  .breadcrumb .star {
+    margin-left: 8px;
+    color: #d4a017;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* ===== View header (workbook title + actions) ===== */
+  .view-header {
+    background: white;
+    padding: 12px 20px 8px 20px;
+    border-bottom: 1px solid var(--chrome-border-light);
+  }
+  .view-header .title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .view-header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .view-header .meta {
+    color: var(--ink-muted);
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  .view-header .meta a { color: var(--link); text-decoration: none; }
+
+  /* ===== Tableau Toolbar ===== */
+  .toolbar {
+    background: white;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--chrome-border);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .toolbar .tb-btn {
+    padding: 5px 10px;
+    background: white;
+    border: 1px solid transparent;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+  }
+  .toolbar .tb-btn:hover { background: #f0f0f0; border-color: var(--chrome-border-light); }
+  .toolbar .tb-btn.disabled { color: #bbb; cursor: default; }
+  .toolbar .tb-btn.disabled:hover { background: white; border-color: transparent; }
+  .toolbar .divider {
+    width: 1px;
+    height: 20px;
+    background: var(--chrome-border-light);
+    margin: 0 6px;
+  }
+  .toolbar .right {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
+  .toolbar .tb-btn.primary {
+    background: var(--link);
+    color: white;
+    border-color: var(--link);
+  }
+  .toolbar .tb-btn.primary:hover { background: #005a91; }
+
+  /* ===== Dashboard Canvas ===== */
+  .canvas-wrap {
+    padding: 12px;
+    background: var(--page-bg);
+  }
+  .dashboard {
+    background: white;
+    padding: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid var(--chrome-border-light);
+  }
+
+  .dashboard-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 4px;
+  }
+  .dashboard-subtitle {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== Filter bar (right side vertical) ===== */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 12px;
+  }
+  .filter-panel {
+    background: #f8f8f8;
+    border: 1px solid var(--chrome-border-light);
+    padding: 10px;
+    font-size: 12px;
+  }
+  .filter-panel h4 {
+    margin: 0 0 8px 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--chrome-border-light);
+    padding-bottom: 6px;
+  }
+  .filter-group { margin-bottom: 14px; }
+  .filter-group .label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-size: 11px;
+  }
+  .filter-group select {
+    width: 100%;
+    padding: 3px 5px;
+    border: 1px solid var(--chrome-border);
+    background: white;
+    font-size: 12px;
+    font-family: inherit;
+  }
+  .filter-group .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 3px 0;
+    font-size: 12px;
+  }
+  .filter-group .checkbox input { margin: 0; }
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #ddd;
+    outline: none;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px; height: 12px;
+    background: var(--link);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  /* ===== KPI Sheets ===== */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .kpi-sheet {
+    background: white;
+    border: 1px solid var(--chrome-border-light);
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .kpi-sheet .val {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .kpi-sheet .val.blue { color: var(--tab-blue); }
+  .kpi-sheet .val.orange { color: var(--tab-orange); }
+  .kpi-sheet .val.red { color: var(--tab-red); }
+  .kpi-sheet .val.green { color: var(--tab-green); }
+  .kpi-sheet .lbl {
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .kpi-sheet .delta {
+    font-size: 11px;
+    margin-top: 4px;
+    color: var(--ink-muted);
+  }
+  .kpi-sheet .delta.up { color: var(--tab-green); }
+  .kpi-sheet .delta.down { color: var(--tab-red); }
+
+  /* ===== Sheet cards ===== */
+  .row {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .row.two { grid-template-columns: 1.3fr 1fr; }
+  .row.split { grid-template-columns: 1fr 1fr; }
+  .row.full { grid-template-columns: 1fr; }
+
+  .sheet {
+    background: white;
+    border: 1px solid var(--chrome-border-light);
+    display: flex;
+    flex-direction: column;
+  }
+  .sheet .sheet-title {
+    padding: 8px 12px;
+    background: #fafafa;
+    border-bottom: 1px solid var(--chrome-border-light);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sheet .sheet-title .actions {
+    display: flex;
+    gap: 4px;
+    color: #999;
+    font-size: 11px;
+  }
+  .sheet .sheet-title .actions span { cursor: pointer; padding: 0 3px; }
+  .sheet .sheet-body {
+    padding: 12px;
+    flex: 1;
+  }
+  .sheet .chart-wrap { position: relative; height: 220px; }
+  .sheet .chart-wrap.tall { height: 260px; }
+
+  /* ===== NJ County Map (tile grid) ===== */
+  .county-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .county-tile {
+    padding: 6px 8px;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .county-tile:hover { outline: 2px solid var(--link); outline-offset: -2px; }
+  .county-tile .cnt { font-weight: 400; opacity: 0.9; font-size: 10px; }
+  .r-high { background: #b21e28; }
+  .r-medhigh { background: #d62728; }
+  .r-med { background: #ff7f0e; }
+  .r-medlow { background: #ffbf47; color: #333; }
+  .r-low { background: #2ca02c; }
+  .r-verylow { background: #4d9e4a; }
+
+  .map-legend {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--chrome-border-light);
+    font-size: 11px;
+    color: var(--ink-muted);
+    align-items: center;
+  }
+  .map-legend .swatch {
+    display: inline-block;
+    width: 12px; height: 12px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* ===== Data Table ===== */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table.data th {
+    text-align: left;
+    background: #f5f5f5;
+    padding: 6px 8px;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--chrome-border);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  table.data td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--chrome-border-light);
+  }
+  table.data tr:hover { background: #f8fbfe; }
+  table.data .county-cell { font-weight: 600; color: var(--link); cursor: pointer; }
+  table.data .county-cell:hover { text-decoration: underline; }
+  .cell-bar {
+    display: inline-block;
+    height: 10px;
+    background: var(--tab-blue);
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  .status-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: white;
+    border-radius: 2px;
+  }
+  .st-critical { background: var(--tab-red); }
+  .st-high { background: var(--tab-orange); }
+  .st-resolved { background: var(--tab-green); }
+  .st-open { background: var(--tab-blue); }
+
+  /* ===== Sheet tabs at bottom ===== */
+  .sheet-tabs {
+    background: #ececec;
+    border-top: 1px solid var(--chrome-border);
+    padding: 4px 12px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+  }
+  .sheet-tab {
+    padding: 5px 14px;
+    background: #dcdcdc;
+    border: 1px solid var(--chrome-border);
+    border-bottom: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    font-size: 12px;
+  }
+  .sheet-tab.active {
+    background: white;
+    color: var(--ink);
+    font-weight: 600;
+    position: relative;
+    top: 1px;
+    padding-bottom: 6px;
+  }
+  .sheet-tab:hover:not(.active) { background: #e6e6e6; }
+  .sheet-tabs .tab-controls {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+    color: #888;
+    padding-bottom: 4px;
+  }
+
+  /* ===== Status bar ===== */
+  .status-bar {
+    background: #ececec;
+    border-top: 1px solid var(--chrome-border);
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--ink-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ===== Funnel chart ===== */
+  .funnel { padding: 4px 0; }
+  .funnel-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 50px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  .funnel-bar {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .funnel-row .lbl { color: var(--ink); }
+  .funnel-row .pct { color: var(--ink-muted); font-size: 11px; text-align: right; }
+
+  /* ===== Tooltip look ===== */
+  .caption {
+    background: #fff9e6;
+    border-left: 3px solid #ffcc00;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #665500;
+    margin-top: 8px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- Tableau Server top nav -->
+<div class="server-nav">
+  <div class="logo">
+    <span class="logo-mark">T</span>
+    <span>Tableau Cloud</span>
+  </div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Explore</a>
+    <a href="#">Favorites</a>
+    <a href="#">Recents</a>
+    <a href="#">Shared with Me</a>
+    <a href="#">Recommendations</a>
+    <a href="#" class="active">Collections</a>
+  </div>
+  <div class="right">
+    <input class="search" type="text" placeholder="Search for views, workbooks, and more" />
+    <span class="icon-btn" title="Tasks">≡</span>
+    <span class="icon-btn" title="Notifications">🔔</span>
+    <span class="icon-btn" title="Help">?</span>
+    <div class="avatar">MD</div>
+  </div>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="#">NJ OCSS</a>
+  <span class="sep">›</span>
+  <a href="#">Workbooks</a>
+  <span class="sep">›</span>
+  <a href="#">Safeguard Program FY26</a>
+  <span class="sep">›</span>
+  <span class="current">Executive Overview</span>
+  <span class="star">★</span>
+</div>
+
+<!-- Workbook header -->
+<div class="view-header">
+  <div class="title-row">
+    <h1>Safeguard Program - Executive Overview</h1>
+  </div>
+  <div class="meta">
+    <a href="#">Safeguard Program FY26</a> · Last refreshed 12 minutes ago · Owner: <a href="#">Mahathi Devulapalli</a> · <a href="#">Data Source: NJOCSS_Salesforce_Live</a>
+  </div>
+</div>
+
+<!-- Tableau Toolbar -->
+<div class="toolbar">
+  <button class="tb-btn"><span>↶</span> Undo</button>
+  <button class="tb-btn disabled"><span>↷</span> Redo</button>
+  <button class="tb-btn"><span>⟲</span> Revert</button>
+  <button class="tb-btn"><span>↻</span> Refresh</button>
+  <button class="tb-btn"><span>⏸</span> Pause</button>
+  <div class="divider"></div>
+  <button class="tb-btn"><span>👁</span> View: Original ▾</button>
+  <button class="tb-btn"><span>🔔</span> Alert</button>
+  <button class="tb-btn"><span>✉</span> Subscribe</button>
+  <button class="tb-btn"><span>✎</span> Edit</button>
+  <div class="right">
+    <button class="tb-btn"><span>💬</span> Comments</button>
+    <button class="tb-btn"><span>⬇</span> Download</button>
+    <button class="tb-btn"><span>⇱</span> Full Screen</button>
+    <button class="tb-btn primary"><span>↗</span> Share</button>
+    <button class="tb-btn">⋮</button>
+  </div>
+</div>
+
+<!-- Canvas -->
+<div class="canvas-wrap">
+  <div class="dashboard">
+
+    <div class="dashboard-title">Safeguard Program Health · IRS Pub 1075 Compliance</div>
+    <div class="dashboard-subtitle">Reporting period: FY 2024 - FY 2026 YTD · All 21 New Jersey Counties</div>
+
+    <div class="content-grid">
+
+      <!-- Main content -->
+      <div>
+
+        <!-- KPIs -->
+        <div class="kpi-row">
+          <div class="kpi-sheet">
+            <div class="val green">87%</div>
+            <div class="lbl">Compliance Rate</div>
+            <div class="delta up">▲ 6.2 pts vs FY25</div>
+          </div>
+          <div class="kpi-sheet">
+            <div class="val blue">124</div>
+            <div class="lbl">Inspections (3-yr)</div>
+            <div class="delta">42 in FY26 YTD</div>
+          </div>
+          <div class="kpi-sheet">
+            <div class="val orange">63</div>
+            <div class="lbl">Open CAPs</div>
+            <div class="delta">17 counties</div>
+          </div>
+          <div class="kpi-sheet">
+            <div class="val red">14</div>
+            <div class="lbl">Overdue CAPs</div>
+            <div class="delta down">▲ 3 vs last month</div>
+          </div>
+          <div class="kpi-sheet">
+            <div class="val blue">47d</div>
+            <div class="lbl">Avg Cycle Time</div>
+            <div class="delta up">▼ 18d vs FY25</div>
+          </div>
+        </div>
+
+        <!-- Row 1: County map + Trend -->
+        <div class="row two">
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Open CAPs by County (Risk Rating)</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="county-grid">
+                <div class="county-tile r-high">Camden<span class="cnt">8</span></div>
+                <div class="county-tile r-high">Cumberland<span class="cnt">6</span></div>
+                <div class="county-tile r-high">Passaic<span class="cnt">7</span></div>
+                <div class="county-tile r-medhigh">Salem<span class="cnt">5</span></div>
+                <div class="county-tile r-med">Essex<span class="cnt">4</span></div>
+                <div class="county-tile r-med">Hudson<span class="cnt">4</span></div>
+                <div class="county-tile r-med">Mercer<span class="cnt">3</span></div>
+                <div class="county-tile r-med">Atlantic<span class="cnt">3</span></div>
+                <div class="county-tile r-med">Ocean<span class="cnt">3</span></div>
+                <div class="county-tile r-medlow">Union<span class="cnt">2</span></div>
+                <div class="county-tile r-medlow">Warren<span class="cnt">2</span></div>
+                <div class="county-tile r-medlow">Gloucester<span class="cnt">2</span></div>
+                <div class="county-tile r-low">Bergen<span class="cnt">1</span></div>
+                <div class="county-tile r-low">Middlesex<span class="cnt">1</span></div>
+                <div class="county-tile r-low">Morris<span class="cnt">1</span></div>
+                <div class="county-tile r-low">Monmouth<span class="cnt">1</span></div>
+                <div class="county-tile r-verylow">Somerset<span class="cnt">0</span></div>
+                <div class="county-tile r-verylow">Burlington<span class="cnt">0</span></div>
+                <div class="county-tile r-verylow">Hunterdon<span class="cnt">0</span></div>
+                <div class="county-tile r-verylow">Sussex<span class="cnt">0</span></div>
+                <div class="county-tile r-verylow">Cape May<span class="cnt">0</span></div>
+              </div>
+              <div class="map-legend">
+                <span style="font-weight: 600; color: var(--ink);">Open CAPs</span>
+                <span><span class="swatch" style="background: #2ca02c;"></span>0</span>
+                <span><span class="swatch" style="background: #ffbf47;"></span>2</span>
+                <span><span class="swatch" style="background: #ff7f0e;"></span>4</span>
+                <span><span class="swatch" style="background: #d62728;"></span>6</span>
+                <span><span class="swatch" style="background: #b21e28;"></span>8+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Compliance Rate Trend</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="chart-wrap tall"><canvas id="trendChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Findings by section + CAP Funnel -->
+        <div class="row two">
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Findings by IRS Pub 1075 Section</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="chart-wrap tall"><canvas id="findingsChart"></canvas></div>
+            </div>
+          </div>
+
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>CAP Lifecycle Funnel · FY26</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="funnel">
+                <div class="funnel-row"><span class="lbl">Open</span><div class="funnel-bar" style="width: 100%; background: #1f77b4;">63</div><span class="pct">100%</span></div>
+                <div class="funnel-row"><span class="lbl">In Progress</span><div class="funnel-bar" style="width: 78%; background: #17becf;">49</div><span class="pct">78%</span></div>
+                <div class="funnel-row"><span class="lbl">Pending Verify</span><div class="funnel-bar" style="width: 54%; background: #ff7f0e;">34</div><span class="pct">54%</span></div>
+                <div class="funnel-row"><span class="lbl">Verified</span><div class="funnel-bar" style="width: 41%; background: #2ca02c;">26</div><span class="pct">41%</span></div>
+                <div class="funnel-row"><span class="lbl">Closed</span><div class="funnel-bar" style="width: 32%; background: #196f19;">20</div><span class="pct">32%</span></div>
+              </div>
+              <div class="caption">Biggest drop-off: Pending Verify → Verified (24%). Evidence review is the bottleneck.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Workload + Seasonality -->
+        <div class="row split">
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Inspector Workload Distribution</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="chart-wrap"><canvas id="workloadChart"></canvas></div>
+            </div>
+          </div>
+
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Inspection Volume · Monthly Seasonality</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <div class="chart-wrap"><canvas id="seasonChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 4: Repeat offenders -->
+        <div class="row full">
+          <div class="sheet">
+            <div class="sheet-title">
+              <span>Repeat Offenders · Chronic Findings Across Cycles</span>
+              <div class="actions"><span>▾</span><span>⋮</span></div>
+            </div>
+            <div class="sheet-body">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>County</th>
+                    <th>Pub 1075 Section</th>
+                    <th>Cycles</th>
+                    <th>First Cited</th>
+                    <th>Latest Status</th>
+                    <th>Days Open</th>
+                    <th>Inspector</th>
+                    <th>Risk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="county-cell">Camden</td>
+                    <td>§5.5 Awareness Training</td>
+                    <td><span class="cell-bar" style="width: 60px;"></span>3</td>
+                    <td>FY 2024</td>
+                    <td>In Progress</td>
+                    <td>127</td>
+                    <td>J. Reyes</td>
+                    <td><span class="status-tag st-critical">Critical</span></td>
+                  </tr>
+                  <tr>
+                    <td class="county-cell">Cumberland</td>
+                    <td>§9.3.1.5 Audit Logging</td>
+                    <td><span class="cell-bar" style="width: 60px;"></span>3</td>
+                    <td>FY 2024</td>
+                    <td>Pending Verify</td>
+                    <td>94</td>
+                    <td>J. Reyes</td>
+                    <td><span class="status-tag st-critical">Critical</span></td>
+                  </tr>
+                  <tr>
+                    <td class="county-cell">Passaic</td>
+                    <td>§4.3 Physical Security</td>
+                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
+                    <td>FY 2025</td>
+                    <td>Open</td>
+                    <td>62</td>
+                    <td>M. Chen</td>
+                    <td><span class="status-tag st-high">High</span></td>
+                  </tr>
+                  <tr>
+                    <td class="county-cell">Salem</td>
+                    <td>§5.5 Awareness Training</td>
+                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
+                    <td>FY 2025</td>
+                    <td>In Progress</td>
+                    <td>51</td>
+                    <td>P. Okafor</td>
+                    <td><span class="status-tag st-high">High</span></td>
+                  </tr>
+                  <tr>
+                    <td class="county-cell">Essex</td>
+                    <td>§8.3 Media Sanitization</td>
+                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
+                    <td>FY 2025</td>
+                    <td>Verified</td>
+                    <td>0</td>
+                    <td>L. Duarte</td>
+                    <td><span class="status-tag st-resolved">Resolved</span></td>
+                  </tr>
+                  <tr>
+                    <td class="county-cell">Hudson</td>
+                    <td>§9.3.1.5 Audit Logging</td>
+                    <td><span class="cell-bar" style="width: 40px;"></span>2</td>
+                    <td>FY 2025</td>
+                    <td>Open</td>
+                    <td>38</td>
+                    <td>S. Whitman</td>
+                    <td><span class="status-tag st-open">Open</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Filter panel -->
+      <div class="filter-panel">
+        <h4>Filters</h4>
+
+        <div class="filter-group">
+          <div class="label">Fiscal Year</div>
+          <select>
+            <option>(All)</option>
+            <option>FY 2026</option>
+            <option>FY 2025</option>
+            <option>FY 2024</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <div class="label">Compliance Rating</div>
+          <label class="checkbox"><input type="checkbox" checked> (All)</label>
+          <label class="checkbox"><input type="checkbox" checked> High Risk</label>
+          <label class="checkbox"><input type="checkbox" checked> Medium</label>
+          <label class="checkbox"><input type="checkbox" checked> Low</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="label">Region</div>
+          <select>
+            <option>(All)</option>
+            <option>North Jersey</option>
+            <option>Central Jersey</option>
+            <option>South Jersey</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <div class="label">Inspector</div>
+          <select>
+            <option>(All)</option>
+            <option>J. Reyes</option>
+            <option>M. Chen</option>
+            <option>P. Okafor</option>
+            <option>L. Duarte</option>
+            <option>S. Whitman</option>
+            <option>A. Sharma</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <div class="label">Pub 1075 Section</div>
+          <label class="checkbox"><input type="checkbox" checked> §3 Records</label>
+          <label class="checkbox"><input type="checkbox" checked> §4 Physical</label>
+          <label class="checkbox"><input type="checkbox" checked> §5 Training</label>
+          <label class="checkbox"><input type="checkbox" checked> §6 Encryption</label>
+          <label class="checkbox"><input type="checkbox" checked> §8 Media</label>
+          <label class="checkbox"><input type="checkbox" checked> §9 Audit Logs</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="label">Days Open (CAP)</div>
+          <input type="range" min="0" max="180" value="0" class="slider">
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-muted); margin-top: 2px;">
+            <span>0</span><span>180+</span>
+          </div>
+        </div>
+
+        <div style="font-size: 10px; color: var(--ink-muted); margin-top: 16px; border-top: 1px solid var(--chrome-border-light); padding-top: 8px;">
+          <strong>Data Source</strong><br>
+          NJOCSS_Salesforce_Live<br>
+          <span style="color: #2ca02c;">● Connected</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sheet tabs -->
+<div class="sheet-tabs">
+  <div class="sheet-tab active">Executive Overview</div>
+  <div class="sheet-tab">County Deep Dive</div>
+  <div class="sheet-tab">Findings Detail</div>
+  <div class="sheet-tab">Inspector Performance</div>
+  <div class="sheet-tab">CAP Aging</div>
+  <div class="sheet-tab">Compliance Trend</div>
+  <div class="tab-controls">
+    <span>◀</span><span>▶</span><span>▤</span>
+  </div>
+</div>
+
+<!-- Status bar -->
+<div class="status-bar">
+  <div>218 marks · 6 rows by 8 columns · SUM(CAP Count): 63</div>
+  <div>Server: nj-tableau.gov · Site: OCSS · <a href="#" style="color: var(--link); text-decoration: none;">Data Details</a></div>
+</div>
+
+<script>
+  Chart.defaults.font.family = 'Source Sans 3, Helvetica Neue, Arial, sans-serif';
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = '#666666';
+  Chart.defaults.borderColor = '#e0e0e0';
+
+  // Trend
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels: ['FY24 Q1','Q2','Q3','Q4','FY25 Q1','Q2','Q3','Q4','FY26 Q1','Q2','Q3'],
+      datasets: [{
+        label: 'Compliance %',
+        data: [68, 71, 70, 74, 76, 78, 81, 83, 84, 86, 87],
+        borderColor: '#1f77b4',
+        backgroundColor: 'rgba(31, 119, 180, 0.15)',
+        fill: true,
+        tension: 0.25,
+        pointRadius: 3,
+        pointBackgroundColor: '#1f77b4',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // Findings bar
+  new Chart(document.getElementById('findingsChart'), {
+    type: 'bar',
+    data: {
+      labels: ['§5.5 Training','§4.3 Physical','§9.3 Audit Logs','§8.3 Media','§3 Records','§6.3 Encryption','Other'],
+      datasets: [{
+        label: 'Findings',
+        data: [87, 51, 48, 32, 18, 8, 4],
+        backgroundColor: ['#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#2ca02c','#7f7f7f'],
+        borderRadius: 0,
+        barThickness: 18
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  // Workload
+  new Chart(document.getElementById('workloadChart'), {
+    type: 'bar',
+    data: {
+      labels: ['J. Reyes','M. Chen','P. Okafor','L. Duarte','S. Whitman','A. Sharma'],
+      datasets: [
+        { label: 'Active Inspections', data: [12, 6, 5, 4, 4, 2], backgroundColor: '#1f77b4' },
+        { label: 'Open CAPs', data: [22, 11, 9, 8, 7, 6], backgroundColor: '#ff7f0e' }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  // Seasonality
+  new Chart(document.getElementById('seasonChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets: [
+        { label: 'FY24', data: [2,3,7,4,3,2,3,4,8,5,2,1], borderColor: '#c7c7c7', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
+        { label: 'FY25', data: [3,4,9,5,4,3,4,5,10,6,3,2], borderColor: '#7f7f7f', backgroundColor: 'transparent', tension: 0.25, pointRadius: 2, borderWidth: 1.5 },
+        { label: 'FY26', data: [4,5,11,6,5,4,5,null,null,null,null,null], borderColor: '#1f77b4', backgroundColor: 'rgba(31, 119, 180, 0.1)', fill: true, tension: 0.25, pointRadius: 3, borderWidth: 2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
