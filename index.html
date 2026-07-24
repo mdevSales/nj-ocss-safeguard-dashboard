@@ -383,7 +383,15 @@
         <span style="padding: 3px 8px; background: white; border: 1px solid #17becf; color: #17becf; border-radius: 12px; font-weight: 600;">● Lenel Badge</span>
         <span style="padding: 3px 8px; background: white; border: 1px solid #8c564b; color: #8c564b; border-radius: 12px; font-weight: 600;">● IRS SIRT Portal</span>
         <span style="padding: 3px 8px; background: white; border: 1px solid #7f7f7f; color: #7f7f7f; border-radius: 12px; font-weight: 600;">● NJ CSE Case Mgmt</span>
-        <span style="margin-left: auto; color: var(--ink-muted); font-size: 10px;">Blended via Tableau Prep · Refreshed 12 min ago</span>
+        <span style="margin-left: auto; color: var(--ink-muted); font-size: 10px;">Blended via Tableau Prep · Refreshed <span id="refresh-time">12 min</span> ago</span>
+        <button id="refresh-btn" style="padding: 4px 10px; background: var(--link); color: white; border: none; border-radius: 3px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit;">↻ Refresh Now</button>
+      </div>
+
+      <!-- Active filter chips -->
+      <div id="active-filters" style="display: none; padding: 6px 12px; background: #fff8ea; border: 1px solid #f5deb3; margin-bottom: 10px; font-size: 11px; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <span style="font-weight: 700; color: #7c5a00; text-transform: uppercase; letter-spacing: 0.5px;">Active Filters:</span>
+        <span id="chip-container" style="display: inline-flex; gap: 6px; flex-wrap: wrap;"></span>
+        <button id="clear-filters" style="margin-left: auto; padding: 2px 8px; background: white; border: 1px solid #d9c088; color: #7c5a00; border-radius: 10px; font-size: 10px; font-weight: 600; cursor: pointer;">✕ Clear All</button>
       </div>
 
       <div class="content-grid">
@@ -527,30 +535,29 @@
         <div class="filter-panel">
           <h4>Filters</h4>
           <div class="filter-group"><div class="label">Fiscal Year</div>
-            <select><option>(All)</option><option>FY 2026</option><option>FY 2025</option><option>FY 2024</option></select>
+            <select id="f-fy"><option value="ALL">(All)</option><option value="FY26">FY 2026</option><option value="FY25">FY 2025</option><option value="FY24">FY 2024</option></select>
           </div>
           <div class="filter-group"><div class="label">Compliance Rating</div>
-            <label class="checkbox"><input type="checkbox" checked> (All)</label>
-            <label class="checkbox"><input type="checkbox" checked> High Risk</label>
-            <label class="checkbox"><input type="checkbox" checked> Medium</label>
-            <label class="checkbox"><input type="checkbox" checked> Low</label>
+            <label class="checkbox"><input type="checkbox" class="f-rating" value="High" checked> High Risk</label>
+            <label class="checkbox"><input type="checkbox" class="f-rating" value="Medium" checked> Medium</label>
+            <label class="checkbox"><input type="checkbox" class="f-rating" value="Low" checked> Low</label>
           </div>
           <div class="filter-group"><div class="label">Region</div>
-            <select><option>(All)</option><option>North Jersey</option><option>Central Jersey</option><option>South Jersey</option></select>
+            <select id="f-region"><option value="ALL">(All)</option><option value="North">North Jersey</option><option value="Central">Central Jersey</option><option value="South">South Jersey</option></select>
           </div>
           <div class="filter-group"><div class="label">Inspector</div>
-            <select><option>(All)</option><option>J. Reyes</option><option>M. Chen</option><option>P. Okafor</option><option>L. Duarte</option><option>S. Whitman</option><option>A. Sharma</option></select>
+            <select id="f-inspector"><option value="ALL">(All)</option><option>J. Reyes</option><option>M. Chen</option><option>P. Okafor</option><option>L. Duarte</option><option>S. Whitman</option><option>A. Sharma</option></select>
           </div>
           <div class="filter-group"><div class="label">Pub 1075 Section</div>
-            <label class="checkbox"><input type="checkbox" checked> §3 Records</label>
-            <label class="checkbox"><input type="checkbox" checked> §4 Physical</label>
-            <label class="checkbox"><input type="checkbox" checked> §5 Training</label>
-            <label class="checkbox"><input type="checkbox" checked> §6 Encryption</label>
-            <label class="checkbox"><input type="checkbox" checked> §8 Media</label>
-            <label class="checkbox"><input type="checkbox" checked> §9 Audit Logs</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§3 Records" checked> §3 Records</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§4.3 Physical" checked> §4 Physical</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§5.5 Training" checked> §5 Training</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§6.3 Encryption" checked> §6 Encryption</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§8.3 Media" checked> §8 Media</label>
+            <label class="checkbox"><input type="checkbox" class="f-section" value="§9.3 Audit Logs" checked> §9 Audit Logs</label>
           </div>
-          <div class="filter-group"><div class="label">Days Open (CAP)</div>
-            <input type="range" min="0" max="180" value="0" class="slider">
+          <div class="filter-group"><div class="label">Days Open (CAP) — min <span id="days-val" style="color: var(--ink); font-weight: 700;">0</span></div>
+            <input id="f-days" type="range" min="0" max="180" value="0" class="slider">
             <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-muted); margin-top: 2px;"><span>0</span><span>180+</span></div>
           </div>
           <div style="font-size: 10px; color: var(--ink-muted); margin-top: 16px; border-top: 1px solid var(--chrome-border-light); padding-top: 8px;">
@@ -835,6 +842,23 @@ Chart.defaults.color = '#666666';
 Chart.defaults.borderColor = '#e0e0e0';
 
 // ================= Data =================
+function regionOf(name) {
+  if (['Bergen','Passaic','Sussex','Morris','Warren','Hudson','Essex'].includes(name)) return 'North';
+  if (['Camden','Cumberland','Salem','Gloucester','Atlantic','Cape May','Burlington'].includes(name)) return 'South';
+  return 'Central';
+}
+function inspectorOf(name) {
+  const map = {
+    'Camden':'J. Reyes','Cumberland':'J. Reyes','Salem':'J. Reyes','Gloucester':'J. Reyes',
+    'Passaic':'M. Chen','Bergen':'M. Chen','Hudson':'M. Chen',
+    'Essex':'P. Okafor','Union':'P. Okafor','Sussex':'P. Okafor',
+    'Mercer':'L. Duarte','Middlesex':'L. Duarte','Somerset':'L. Duarte',
+    'Monmouth':'S. Whitman','Ocean':'S. Whitman','Atlantic':'S. Whitman','Cape May':'S. Whitman',
+    'Morris':'A. Sharma','Warren':'A. Sharma','Hunterdon':'A. Sharma','Burlington':'A. Sharma'
+  };
+  return map[name] || 'Unassigned';
+}
+
 const COUNTIES = [
   { name: 'Camden', open: 8, rating: 'High' },
   { name: 'Cumberland', open: 6, rating: 'High' },
@@ -857,7 +881,36 @@ const COUNTIES = [
   { name: 'Hunterdon', open: 0, rating: 'Low' },
   { name: 'Sussex', open: 0, rating: 'Low' },
   { name: 'Cape May', open: 0, rating: 'Low' }
-];
+].map(c => ({ ...c, region: regionOf(c.name), inspector: inspectorOf(c.name) }));
+
+// Base (unfiltered) totals to compute deltas from
+const BASE_TOTALS = {
+  compliance: 87, training: 73, overdue: 14, incidents: 42, openCAPs: 63,
+  inspections: 124, cases: '2.4M'
+};
+
+// ================= Filter state =================
+const FILTERS = {
+  fy: 'ALL',
+  ratings: new Set(['High','Medium','Low']),
+  region: 'ALL',
+  inspector: 'ALL',
+  sections: new Set(['§3 Records','§4.3 Physical','§5.5 Training','§6.3 Encryption','§8.3 Media','§9.3 Audit Logs']),
+  minDays: 0,
+  county: null,     // set by clicking a county on the map
+  section: null,    // set by clicking a bar on findings chart
+  refreshShift: 0   // fake refresh perturbation
+};
+
+// Weighted findings by section (used in charts + downstream)
+const SECTION_BASE = {
+  '§5.5 Training': 87,
+  '§4.3 Physical': 51,
+  '§9.3 Audit Logs': 48,
+  '§8.3 Media': 32,
+  '§3 Records': 18,
+  '§6.3 Encryption': 8
+};
 
 function colorFor(open) {
   if (open >= 8) return '#7f1d1d';
@@ -1054,8 +1107,21 @@ function colorFor(open) {
       path.setAttribute('fill', colorFor(c.open));
       path.setAttribute('stroke', 'white');
       path.setAttribute('stroke-width', '0.6');
+      path.setAttribute('data-nj-county', name);
       path.style.cursor = 'pointer';
-      path.addEventListener('click', () => renderCounty(name, f, proj));
+      // Single click = cross-filter; Shift+click or double-click = drill in
+      let clickTimer = null;
+      path.addEventListener('click', (e) => {
+        if (e.shiftKey) { renderCounty(name, f, proj); return; }
+        if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; renderCounty(name, f, proj); return; }
+        clickTimer = setTimeout(() => {
+          clickTimer = null;
+          if (typeof FILTERS !== 'undefined') {
+            FILTERS.county = FILTERS.county === name ? null : name;
+            applyFilters();
+          }
+        }, 220);
+      });
       path.addEventListener('mouseenter', () => path.setAttribute('stroke-width', '1.8'));
       path.addEventListener('mouseleave', () => path.setAttribute('stroke-width', '0.6'));
       const region = ['Bergen','Passaic','Sussex','Morris','Warren','Hudson','Essex'].includes(name) ? 'North'
@@ -1065,7 +1131,8 @@ function colorFor(open) {
         <div class="tt-row"><span class="k">Open CAPs</span><span>${c.open}</span></div>
         <div class="tt-row"><span class="k">Compliance Rating</span><span>${c.rating}</span></div>
         <div class="tt-row"><span class="k">Region</span><span>${region}</span></div>
-        <div style="font-size: 10px; color: #aaa; margin-top: 4px;">Click to drill down</div>`);
+        <div class="tt-row"><span class="k">Inspector</span><span>${c.inspector || '—'}</span></div>
+        <div style="font-size: 10px; color: #aaa; margin-top: 4px;">Click to cross-filter · Double-click to drill down</div>`);
       svg.appendChild(path);
     });
 
@@ -1602,6 +1669,337 @@ new Chart(document.getElementById('forecastChart'), {
     scales: { y: { min: 60, max: 100, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
   }
 });
+
+// ============================================================
+// ============= INTERACTIVITY / CROSS-FILTERING ==============
+// ============================================================
+
+function countyMatchesFilters(c) {
+  if (!FILTERS.ratings.has(c.rating)) return false;
+  if (FILTERS.region !== 'ALL' && c.region !== FILTERS.region) return false;
+  if (FILTERS.inspector !== 'ALL' && c.inspector !== FILTERS.inspector) return false;
+  if (FILTERS.county && c.name !== FILTERS.county) return false;
+  return true;
+}
+
+function fyMultiplier() {
+  if (FILTERS.fy === 'FY24') return 0.75;
+  if (FILTERS.fy === 'FY25') return 0.88;
+  if (FILTERS.fy === 'FY26') return 1.0;
+  return 1.0;
+}
+
+function sectionMultiplier() {
+  const sel = FILTERS.sections.size;
+  return sel / 6;
+}
+
+function daysMultiplier() {
+  if (FILTERS.minDays >= 90) return 0.22;
+  if (FILTERS.minDays >= 60) return 0.42;
+  if (FILTERS.minDays >= 30) return 0.68;
+  return 1.0;
+}
+
+function refreshShift() {
+  return 1 + FILTERS.refreshShift;
+}
+
+function activeCounties() {
+  return COUNTIES.filter(countyMatchesFilters);
+}
+
+function computeAggregates() {
+  const counties = activeCounties();
+  const fym = fyMultiplier();
+  const sm = sectionMultiplier();
+  const dm = daysMultiplier();
+  const rs = refreshShift();
+
+  const openSum = counties.reduce((a, c) => a + c.open, 0);
+  const scale = counties.length / 21;
+
+  return {
+    counties,
+    openCAPs: Math.round(openSum * sm * dm * rs),
+    overdue: Math.max(0, Math.round(BASE_TOTALS.overdue * scale * fym * sm * dm * rs)),
+    incidents: Math.max(0, Math.round(BASE_TOTALS.incidents * scale * fym * rs)),
+    inspections: Math.max(0, Math.round(BASE_TOTALS.inspections * scale * fym * rs)),
+    compliance: Math.min(100, Math.max(50, Math.round((BASE_TOTALS.compliance + (rs - 1) * 40) * 10) / 10)),
+    training: Math.min(100, Math.max(40, Math.round((BASE_TOTALS.training + (rs - 1) * 30) * 10) / 10))
+  };
+}
+
+// ============ Filter chip rendering ============
+function renderChips() {
+  const container = document.getElementById('chip-container');
+  const bar = document.getElementById('active-filters');
+  const chips = [];
+  if (FILTERS.fy !== 'ALL') chips.push({ label: 'FY: ' + FILTERS.fy, key: 'fy' });
+  if (FILTERS.ratings.size < 3) chips.push({ label: 'Rating: ' + [...FILTERS.ratings].join(', '), key: 'ratings' });
+  if (FILTERS.region !== 'ALL') chips.push({ label: 'Region: ' + FILTERS.region, key: 'region' });
+  if (FILTERS.inspector !== 'ALL') chips.push({ label: 'Inspector: ' + FILTERS.inspector, key: 'inspector' });
+  if (FILTERS.sections.size < 6) chips.push({ label: 'Sections: ' + FILTERS.sections.size + ' of 6', key: 'sections' });
+  if (FILTERS.minDays > 0) chips.push({ label: 'Days ≥ ' + FILTERS.minDays, key: 'minDays' });
+  if (FILTERS.county) chips.push({ label: 'County: ' + FILTERS.county, key: 'county' });
+  if (FILTERS.section) chips.push({ label: 'Section: ' + FILTERS.section, key: 'section' });
+
+  container.innerHTML = chips.map(c =>
+    `<span style="background: white; border: 1px solid #d9c088; color: #7c5a00; padding: 2px 8px 2px 10px; border-radius: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+      ${c.label}
+      <span data-clear="${c.key}" style="cursor: pointer; color: #b45309; font-weight: 700; padding: 0 2px;">×</span>
+     </span>`).join('');
+  bar.style.display = chips.length ? 'flex' : 'none';
+
+  container.querySelectorAll('[data-clear]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.getAttribute('data-clear');
+      if (key === 'fy') { FILTERS.fy = 'ALL'; document.getElementById('f-fy').value = 'ALL'; }
+      if (key === 'ratings') { FILTERS.ratings = new Set(['High','Medium','Low']); document.querySelectorAll('.f-rating').forEach(x => x.checked = true); }
+      if (key === 'region') { FILTERS.region = 'ALL'; document.getElementById('f-region').value = 'ALL'; }
+      if (key === 'inspector') { FILTERS.inspector = 'ALL'; document.getElementById('f-inspector').value = 'ALL'; }
+      if (key === 'sections') { FILTERS.sections = new Set(Object.keys(SECTION_BASE)); document.querySelectorAll('.f-section').forEach(x => x.checked = true); }
+      if (key === 'minDays') { FILTERS.minDays = 0; document.getElementById('f-days').value = 0; document.getElementById('days-val').textContent = '0'; }
+      if (key === 'county') { FILTERS.county = null; }
+      if (key === 'section') { FILTERS.section = null; }
+      applyFilters();
+    });
+  });
+}
+
+// ============ KPI updater ============
+function updateKPIs() {
+  const a = computeAggregates();
+  const kpis = document.querySelectorAll('.view-panel[data-view="overview"] .kpi-row .kpi-sheet .val');
+  if (kpis.length >= 5) {
+    kpis[0].textContent = a.compliance + '%';
+    kpis[1].textContent = a.training + '%';
+    kpis[2].textContent = a.overdue;
+    kpis[3].textContent = a.incidents;
+    // Cases KPI stays fixed (source-of-truth level)
+  }
+  // Status bar
+  const sm = document.getElementById('status-metrics');
+  if (sm) sm.textContent = `${a.counties.length} counties · ${a.openCAPs} open CAPs · ${a.overdue} overdue · ${a.inspections} inspections`;
+}
+
+// ============ Chart updaters ============
+function updateFindingsChart() {
+  const chart = Chart.getChart('findingsChart');
+  if (!chart) return;
+  const rs = refreshShift();
+  const fym = fyMultiplier();
+  const scale = activeCounties().length / 21;
+  const labels = chart.data.labels;
+  chart.data.datasets[0].data = labels.map(lbl => {
+    const base = SECTION_BASE[lbl] ?? 4;
+    const active = FILTERS.sections.has(lbl);
+    return active ? Math.round(base * scale * fym * rs) : 0;
+  });
+  // Highlight cross-filter section
+  chart.data.datasets[0].backgroundColor = labels.map((lbl, i) => {
+    const active = FILTERS.sections.has(lbl);
+    const base = ['#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#2ca02c','#7f7f7f'][i] || '#7f7f7f';
+    if (FILTERS.section && FILTERS.section !== lbl) return '#d0d0d0';
+    return active ? base : '#e5e5e5';
+  });
+  chart.update('none');
+}
+
+function updateTrendChart() {
+  const chart = Chart.getChart('trendChart');
+  if (!chart) return;
+  const rs = refreshShift();
+  const base = [68,71,70,74,76,78,81,83,84,86,87];
+  chart.data.datasets[0].data = base.map(v => Math.min(100, Math.round((v + (rs - 1) * 40) * 10) / 10));
+  chart.update('none');
+}
+
+function updateWorkloadChart() {
+  const chart = Chart.getChart('workloadChart');
+  if (!chart) return;
+  const insp = ['J. Reyes','M. Chen','P. Okafor','L. Duarte','S. Whitman','A. Sharma'];
+  const active = activeCounties();
+  const inspections = insp.map(name => {
+    const counties = active.filter(c => c.inspector === name);
+    return counties.length * 2 + (name === 'J. Reyes' ? 4 : 0);
+  });
+  const caps = insp.map(name => {
+    const counties = active.filter(c => c.inspector === name);
+    return counties.reduce((a, c) => a + c.open, 0);
+  });
+  chart.data.datasets[0].data = inspections;
+  chart.data.datasets[1].data = caps;
+  chart.update('none');
+}
+
+function updateSeasonChart() {
+  const chart = Chart.getChart('seasonChart');
+  if (!chart) return;
+  const rs = refreshShift();
+  const base26 = [4,5,11,6,5,4,5];
+  chart.data.datasets[2].data = [...base26.map(v => Math.max(0, Math.round(v * rs))), null,null,null,null,null];
+  chart.update('none');
+}
+
+function updateExternalCharts() {
+  const active = activeCounties();
+  const activeNames = new Set(active.map(c => c.name));
+  const rs = refreshShift();
+
+  // Training chart — dim counties not in filter
+  const training = Chart.getChart('trainingChart');
+  if (training) {
+    const labels = training.data.labels;
+    const orig = [58, 61, 67, 69, 78, 81, 83, 94, 97];
+    const colors = ['#d62728','#d62728','#ff7f0e','#ff7f0e','#1f77b4','#1f77b4','#7f7f7f','#2ca02c','#2ca02c'];
+    training.data.datasets[0].backgroundColor = labels.map((lbl, i) =>
+      (lbl === 'Statewide' || activeNames.has(lbl)) ? colors[i] : '#d0d0d0'
+    );
+    training.update('none');
+  }
+
+  // Turnover chart — mask counties not in filter
+  const turnover = Chart.getChart('turnoverChart');
+  if (turnover) {
+    const labels = turnover.data.labels;
+    ['#c7c7c7','#7f7f7f','#ff7f0e'].forEach((col, di) => {
+      turnover.data.datasets[di].backgroundColor = labels.map(lbl =>
+        activeNames.has(lbl) ? col : '#e8e8e8'
+      );
+    });
+    turnover.update('none');
+  }
+}
+
+function updateMap() {
+  // Re-color the NJ map paths based on filter (dim excluded counties)
+  const svg = document.getElementById('geo-map');
+  if (!svg) return;
+  const activeNames = new Set(activeCounties().map(c => c.name));
+  const cData = Object.fromEntries(COUNTIES.map(c => [c.name, c]));
+  svg.querySelectorAll('path[data-nj-county]').forEach(p => {
+    const name = p.getAttribute('data-nj-county');
+    const c = cData[name];
+    if (activeNames.has(name)) {
+      p.setAttribute('fill', colorFor(c.open));
+      p.setAttribute('opacity', '1');
+      p.setAttribute('stroke-width', FILTERS.county === name ? '2.5' : '0.6');
+      p.setAttribute('stroke', FILTERS.county === name ? '#000' : 'white');
+    } else {
+      p.setAttribute('fill', '#e5e5e5');
+      p.setAttribute('opacity', '0.5');
+    }
+  });
+}
+
+// ============ Master apply ============
+function applyFilters() {
+  updateKPIs();
+  updateFindingsChart();
+  updateTrendChart();
+  updateWorkloadChart();
+  updateSeasonChart();
+  updateExternalCharts();
+  updateMap();
+  renderChips();
+}
+
+// ============ Wire up controls ============
+document.getElementById('f-fy').addEventListener('change', e => {
+  FILTERS.fy = e.target.value; applyFilters();
+});
+document.querySelectorAll('.f-rating').forEach(el => {
+  el.addEventListener('change', () => {
+    FILTERS.ratings = new Set([...document.querySelectorAll('.f-rating:checked')].map(x => x.value));
+    applyFilters();
+  });
+});
+document.getElementById('f-region').addEventListener('change', e => {
+  FILTERS.region = e.target.value; applyFilters();
+});
+document.getElementById('f-inspector').addEventListener('change', e => {
+  FILTERS.inspector = e.target.value; applyFilters();
+});
+document.querySelectorAll('.f-section').forEach(el => {
+  el.addEventListener('change', () => {
+    FILTERS.sections = new Set([...document.querySelectorAll('.f-section:checked')].map(x => x.value));
+    applyFilters();
+  });
+});
+document.getElementById('f-days').addEventListener('input', e => {
+  FILTERS.minDays = parseInt(e.target.value, 10);
+  document.getElementById('days-val').textContent = FILTERS.minDays;
+  applyFilters();
+});
+document.getElementById('clear-filters').addEventListener('click', () => {
+  FILTERS.fy = 'ALL';
+  FILTERS.ratings = new Set(['High','Medium','Low']);
+  FILTERS.region = 'ALL';
+  FILTERS.inspector = 'ALL';
+  FILTERS.sections = new Set(Object.keys(SECTION_BASE));
+  FILTERS.minDays = 0;
+  FILTERS.county = null;
+  FILTERS.section = null;
+  document.getElementById('f-fy').value = 'ALL';
+  document.getElementById('f-region').value = 'ALL';
+  document.getElementById('f-inspector').value = 'ALL';
+  document.getElementById('f-days').value = 0;
+  document.getElementById('days-val').textContent = '0';
+  document.querySelectorAll('.f-rating').forEach(x => x.checked = true);
+  document.querySelectorAll('.f-section').forEach(x => x.checked = true);
+  applyFilters();
+});
+
+// Cross-filter: click a findings bar → filter that section
+setTimeout(() => {
+  const findings = Chart.getChart('findingsChart');
+  if (findings) {
+    findings.options.onClick = (evt, els) => {
+      if (!els.length) return;
+      const idx = els[0].index;
+      const label = findings.data.labels[idx];
+      FILTERS.section = FILTERS.section === label ? null : label;
+      applyFilters();
+    };
+    findings.update('none');
+  }
+}, 400);
+
+// Refresh button — simulate live data update
+let refreshCount = 0;
+document.getElementById('refresh-btn').addEventListener('click', () => {
+  const btn = document.getElementById('refresh-btn');
+  btn.textContent = '⟳ Refreshing…';
+  btn.disabled = true;
+  setTimeout(() => {
+    // Shuffle numbers ±6% deterministically
+    refreshCount++;
+    const seed = refreshCount % 5;
+    FILTERS.refreshShift = ({0: 0, 1: 0.04, 2: -0.03, 3: 0.06, 4: -0.05})[seed];
+    document.getElementById('refresh-time').textContent = 'just now';
+    btn.textContent = '↻ Refresh Now';
+    btn.disabled = false;
+    applyFilters();
+    // Highlight KPIs briefly
+    document.querySelectorAll('.view-panel[data-view="overview"] .kpi-sheet').forEach(el => {
+      el.style.transition = 'background 0.4s';
+      el.style.background = '#fff8ea';
+      setTimeout(() => { el.style.background = 'white'; }, 700);
+    });
+  }, 600);
+});
+
+// Auto-tick the "refreshed X ago" label
+let refreshMinutes = 12;
+setInterval(() => {
+  refreshMinutes++;
+  const el = document.getElementById('refresh-time');
+  if (el && el.textContent !== 'just now') el.textContent = refreshMinutes + ' min';
+}, 60000);
+
+// Initial pass
+setTimeout(applyFilters, 300);
 </script>
 
 </body>
